@@ -32,5 +32,20 @@ describe("spec", () => {
       define(SPEC, p.number)
       expect(conform(SPEC, 40)).to.equal(40)
     })
+
+    it("works on maps", () => {
+      const friendSpec = {
+        name: p.string,
+        phone: p.or(p.int, p.string),
+        [p.optional]: {
+          town: p.string
+        }
+      }
+      const dolph = {
+        name: "dolph",
+        phone: "+49 175 134081580"
+      }
+      expect(valid(friendSpec, dolph), "dolph").to.be.true
+    })
   })
 })

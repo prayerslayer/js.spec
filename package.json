@@ -1,6 +1,6 @@
 {
   "name": "js.spec",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "clojure.spec for Javascript",
   "main": "index.js",
   "scripts": {
@@ -33,6 +33,7 @@
     "lodash.isinteger": "^4.0.4",
     "lodash.isnil": "^4.0.0",
     "lodash.isnumber": "^3.0.3",
+    "lodash.isplainobject": "^4.0.6",
     "lodash.isregexp": "^4.0.1",
     "lodash.isset": "^4.4.2",
     "lodash.isstring": "^4.0.1",

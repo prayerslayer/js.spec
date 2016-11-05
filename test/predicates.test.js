@@ -37,4 +37,101 @@ describe("predicate", () => {
       expect(bigInt(10000)).to.be.true
     })
   })
+
+  describe("record", () => {
+    const friend = p.record({
+      name: p.string,
+      phone: p.or(p.int, p.string),
+      [p.optional]: {
+        town: p.string,
+        parents: p.record({
+          father: p.string,
+          mother: p.string,
+          [p.optional]: {
+            otherRelatives: p.record({
+              aunt: p.string
+            })
+          }
+        })
+      }
+    })
+    it("returns true if optional key is omitted", () => {
+      const dolph = {
+        name: "dolph",
+        phone: "+49 175 134081580"
+      }
+      expect(friend(dolph), "dolph").to.be.true
+    })
+    it("returns false if required key is omitted", () => {
+      const astrid = {
+        name: "astrid",
+        town: "stockholm"
+      }
+      expect(friend(astrid), "astrid").to.be.false
+    })
+    it("returns false if required key is present, but not conform", () => {
+      const holger = {
+        name: "holger",
+        phone: "1235",
+        phone: false
+      }
+      expect(friend(holger), "holger").to.be.false
+    })
+    it("returns false if optional key is present, but not conform", () => {
+      const recep = {
+        name: "recep",
+        phone: "1235",
+        town: false
+      }
+      expect(friend(recep), "recep").to.be.false
+    })
+    it("returns true if there are additional keys", () => {
+      const lindsay = {
+        name: "lindsay",
+        phone: "+0 4525252",
+        doesThisMatter: false
+      }
+      expect(friend(lindsay), "lindsay").to.be.true
+    })
+    it("works with 1x nested structures", () => {
+      const freddy = {
+        name: "freddy",
+        phone: "+0 4525252",
+        parents: {
+          mother: "mom",
+          father: "pop"
+        }
+      }
+      expect(friend(freddy), "freddy").to.be.true
+    })
+    it("works with 2x nested structures - happy", () => {
+      const lauri = {
+        name: "lauri",
+        phone: "+0 4525252",
+        parents: {
+          mother: "mom",
+          father: "pop",
+          otherRelatives: {
+            aunt: "barb"
+          }
+        }
+      }
+      expect(friend(lauri), "lauri").to.be.true
+    })
+
+    it("works with 2x nested structures - sad", () => {
+      const ingo = {
+        name: "ingo",
+        phone: "+0 4525252",
+        parents: {
+          mother: "mom",
+          father: "pop",
+          otherRelatives: {
+            aunt: true
+          }
+        }
+      }
+      expect(friend(ingo), "ingo").to.be.false
+    })
+  })
 })
