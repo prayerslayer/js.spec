@@ -1,5 +1,7 @@
 # js.spec
 
+![Latest build](https://travis-ci.org/prayerslayer/js.spec.svg)
+
 clojure.spec for Javascript
 
 This is the second part of the READMe. First part will be added as soon as I can log into the other computer again.
