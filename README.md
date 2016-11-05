@@ -10,9 +10,11 @@ This is the second part of the READMe. First part will be added as soon as I can
 2. Sequences
 3. Generators
 
+# Usage
+
 ## Entity maps
 
-~~~ javascript
+~~~ javascript
 import spec, { predicates as p } from 'js-spec'
 
 const EMAIL = Symbol("EMAIL")
