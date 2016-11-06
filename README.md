@@ -1,6 +1,7 @@
 # js.spec
 
 ![Latest build](https://travis-ci.org/prayerslayer/js.spec.svg)
+[![Coverage Status](https://coveralls.io/repos/github/prayerslayer/js.spec/badge.svg?branch=master)](https://coveralls.io/github/prayerslayer/js.spec?branch=master)
 
 clojure.spec for Javascript
 
