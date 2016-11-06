@@ -189,6 +189,56 @@ describe("map", () => {
 
     })
 
+    describe("works on spec aliases", () => {
+      const school = Symbol("School")
+      define(school, map({
+        district: p.string
+      }))
+      const friend = map({
+        name: p.string,
+        school
+      })
+
+      const TEST_DATA = [{
+        value: {
+          name: "holger",
+          school: {
+            district: "xhain"
+          }
+        },
+        message: "happy case",
+        expectedValid: true
+      }, {
+        value: {
+          name: "holger",
+          school: {
+            district: 9
+          }
+        },
+        message: "invalid nested key",
+        expectedValid: false
+      }, {
+        value: {
+          name: "holger",
+          school: {}
+        },
+        message: "missing required nested key",
+        expectedValid: false
+      }, {
+        value: {
+          name: "holger",
+          university: {
+            district: "xhain"
+          }
+        },
+        message: "wrong required nested key",
+        expectedValid: false
+      }]
+
+      generateConformTests(TEST_DATA, (test) => friend.conform(test.value))
+
+    })
+
     describe("works on flat maps", () => {
       const symbolKey = Symbol()
       const spec = map({
