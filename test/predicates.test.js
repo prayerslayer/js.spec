@@ -1,5 +1,6 @@
 import { expect } from 'chai'
 import * as p from '../lib/predicates'
+import { optional } from '../lib/symbols'
 
 describe("predicate", () => {
   describe("number", () => {
@@ -42,12 +43,12 @@ describe("predicate", () => {
     const friend = p.record({
       name: p.string,
       phone: p.or(p.int, p.string),
-      [p.optional]: {
+      [optional]: {
         town: p.string,
         parents: p.record({
           father: p.string,
           mother: p.string,
-          [p.optional]: {
+          [optional]: {
             otherRelatives: p.record({
               aunt: p.string
             })

@@ -6,13 +6,22 @@ clojure.spec for Javascript
 
 This is the second part of the READMe. First part will be added as soon as I can log into the other computer again.
 
-# Roadmap
+# MVP Roadmap & Status
 
-1. Predicates, specs, valid(), explain() and conform()
-2. Sequences
-3. Generators
+1. <strike>Predicates</strike>
+1. Specs
+  * <strike>Tuple</strike>
+  * Map
+  * Collection
+  * And, Or
+  * Function
+1. Spec Registry
+1. Sequences
+1. Generators
 
 # Usage
+
+** ATTENTION MAY CHANGE **
 
 ## Entity maps
 

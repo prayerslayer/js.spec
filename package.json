@@ -4,8 +4,8 @@
   "description": "clojure.spec for Javascript",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --recursive --compilers js:babel-register test/**/*.test.js",
-    "test:watch": "mocha --recursive --reporter=min --watch --compilers js:babel-register test/**/*.test.js"
+    "test": "mocha --recursive --compilers js:babel-register test",
+    "test:watch": "mocha --recursive --reporter=min --watch --compilers js:babel-register test"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
     "mocha": "^3.1.2"
   },
   "dependencies": {
+    "lodash.get": "^4.4.2",
     "lodash.isboolean": "^3.0.3",
     "lodash.isdate": "^4.0.1",
     "lodash.isfinite": "^3.3.2",
