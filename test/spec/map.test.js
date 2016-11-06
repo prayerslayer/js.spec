@@ -1,10 +1,11 @@
 import { expect } from 'chai'
 import map from '../../lib/spec/map'
 import * as p from '../../lib/predicates'
+import { explainData } from '../../lib/util'
 import { invalid, optional } from '../../lib/symbols'
 import { define, _clear } from '../../lib/registry'
 
-function generateTests(testData, expectFn) {
+function generateConformTests(testData, expectFn) {
   testData.forEach(test => it(`[${test.message}]`, () => {
     if (test.expectedValid) {
       expect(expectFn(test), test.message).to.deep.equal(test.value)
@@ -15,8 +16,128 @@ function generateTests(testData, expectFn) {
 }
 
 describe("map", () => {
-  describe("conform", () => {
+  describe("explain", () => {
+    describe("works on nested maps", () => {
+      const school = map({
+        district: p.string
+      })
+      const friend = map({
+        name: p.string,
+        school
+      })
 
+      it("[missing key]", () => {
+        const value = {
+          name: "holger",
+          school: {
+            number: 1
+          }
+        }
+        const missingKey = explainData(friend, value)
+        expect(missingKey)
+          .to.be.an("array")
+          .and.have.length(1)
+        expect(missingKey)
+          .to.have.deep.property("[0].predicate")
+          .that.is.a("function")
+        expect(missingKey)
+          .to.have.deep.property("[0].path")
+          .that.is.an("array")
+          .and.deep.equals(["school", "district"])
+        expect(missingKey)
+          .to.have.deep.property("[0].via")
+          .that.is.an("array")
+          .and.deep.equals(["Map", "Map", "Keys(district)"])
+        expect(missingKey)
+          .to.have.deep.property("[0].value")
+          .that.deep.equals(value)
+      })
+
+      it("[invalid key]", () => {
+        const value = {
+          name: "holger",
+          school: {
+            district: 9
+          }
+        }
+        const invalidKey = explainData(friend, value)
+        expect(invalidKey)
+          .to.be.an("array")
+          .and.have.length(1)
+        expect(invalidKey)
+          .to.have.deep.property("[0].predicate")
+          .that.is.a("function")
+        expect(invalidKey)
+          .to.have.deep.property("[0].path")
+          .that.deep.equals(["school", "district"])
+        expect(invalidKey)
+          .to.have.deep.property("[0].via")
+          .that.deep.equals(["Map", "Map", "Keys(district)"])
+        expect(invalidKey)
+          .to.have.deep.property("[0].value")
+          .that.deep.equals(value)
+      })
+    })
+
+    describe("works on flat maps", () => {
+      const friend = map({
+        name: p.string,
+        [optional]: {
+          phone: p.string
+        }
+      })
+
+      it("[missing key]", () => {
+        const missingKey = explainData(friend, {
+          district: "xhain"
+        })
+        expect(missingKey)
+          .to.be.an("array")
+          .and.have.length(1)
+        expect(missingKey)
+          .to.have.deep.property("[0].predicate")
+          .that.is.a("function")
+        expect(missingKey)
+          .to.have.deep.property("[0].path")
+          .that.is.an("array")
+          .and.deep.equals(["name"])
+        expect(missingKey)
+          .to.have.deep.property("[0].via")
+          .that.is.an("array")
+          .and.deep.equals(["Map", "Keys(name)"])
+        expect(missingKey)
+          .to.have.deep.property("[0].value")
+          .that.deep.equals({
+          district: "xhain"
+        })
+      })
+
+      it("[invalid key]", () => {
+        const invalidKey = explainData(friend, {
+          name: 3000
+        })
+        expect(invalidKey)
+          .to.be.an("array")
+          .and.have.length(1)
+        expect(invalidKey)
+          .to.have.deep.property("[0].predicate")
+          .that.is.a("function")
+        expect(invalidKey)
+          .to.have.deep.property("[0].path")
+          .that.deep.equals(["name"])
+        expect(invalidKey)
+          .to.have.deep.property("[0].via")
+          .that.deep.equals(["Map"])
+        expect(invalidKey)
+          .to.have.deep.property("[0].value")
+          .that.deep.equals({
+          name: 3000
+        })
+      })
+    })
+  })
+
+  describe("conform", () => {
     describe("works on nested maps", () => {
       const school = map({
         district: p.string
@@ -62,7 +183,7 @@ describe("map", () => {
         expectedValid: false
       }]
 
-      generateTests(TEST_DATA, (test) => friend.conform(test.value))
+      generateConformTests(TEST_DATA, (test) => friend.conform(test.value))
 
     })
 
@@ -116,7 +237,7 @@ describe("map", () => {
         }
       ]
 
-      generateTests(TEST_DATA, (test) => spec.conform(test.value))
+      generateConformTests(TEST_DATA, (test) => spec.conform(test.value))
 
     })
   })

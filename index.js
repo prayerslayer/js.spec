@@ -14,8 +14,8 @@ export function conform(spec, value) {
 }
 
 export function explain(spec, value) {
-  const problems = (util.specize(spec)).explain([], [], value).filter(x => !!x)
-  problems.forEach(problem => {
-    console.log(`value fails spec ${problem.via[0]} at [${problem.path.join(", ")}]: ${problem.predicateName} failed for ${getIn(value, problem.path)}`)
-  })
+  util.explainData(spec, value)
+    .forEach(problem => {
+      console.log(`value fails spec ${problem.via[0]} at [${problem.path.join(", ")}]: ${problem.predicateName} failed for ${getIn(value, problem.path)}`)
+    })
 }

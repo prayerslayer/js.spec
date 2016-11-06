@@ -25,6 +25,7 @@
     "mocha": "^3.1.2"
   },
   "dependencies": {
+    "lodash.flattendeep": "^4.4.0",
     "lodash.get": "^4.4.2",
     "lodash.isboolean": "^3.0.3",
     "lodash.isdate": "^4.0.1",
