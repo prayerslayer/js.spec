@@ -188,9 +188,11 @@ describe("map", () => {
     })
 
     describe("works on flat maps", () => {
+      const symbolKey = Symbol()
       const spec = map({
         name: p.string,
         [optional]: {
+          [symbolKey]: p.int,
           phone: p.string
         }
       })
@@ -232,6 +234,13 @@ describe("map", () => {
           value: {
             name: "holger",
             bestFriend: false
+          },
+          expectedValid: true
+        }, {
+          message: "optional symbol key",
+          value: {
+            name: "holger",
+            [symbolKey]: 12
           },
           expectedValid: true
         }
