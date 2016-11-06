@@ -15,6 +15,10 @@ export function conform(spec, value) {
 
 export function explain(spec, value) {
   util.explainData(spec, value)
+    .map(problem => {
+      problem.predicateName = util.getName(problem.predicate)
+      return problem
+    })
     .forEach(problem => {
       console.log(`value fails spec ${problem.via[0]} at [${problem.path.join(", ")}]: ${problem.predicateName} failed for ${getIn(value, problem.path)}`)
     })
