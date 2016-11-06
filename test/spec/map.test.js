@@ -7,10 +7,12 @@ import { define, _clear } from '../../lib/registry'
 
 function generateConformTests(testData, expectFn) {
   testData.forEach(test => it(`[${test.message}]`, () => {
+    const result = expectFn(test)
     if (test.expectedValid) {
-      expect(expectFn(test), test.message).to.deep.equal(test.value)
+      expect(result, test.message).to.deep.equal(test.value)
     } else {
-      expect(expectFn(test), test.message).to.equal(invalid)
+      expect(result).to.be.a("symbol")
+      expect(result, test.message).to.equal(invalid)
     }
   }))
 }
@@ -237,14 +239,41 @@ describe("map", () => {
           },
           expectedValid: true
         }, {
-          message: "optional symbol key",
+          message: "conform optional symbol key",
           value: {
             name: "holger",
             [symbolKey]: 12
           },
           expectedValid: true
+        }, {
+          message: "invalid optional symbol key",
+          value: {
+            name: "holger",
+            [symbolKey]: "12"
+          },
+          expectedValid: false
         }
       ]
+
+      it("[invalid required symbol key]", () => {
+        const sym = Symbol()
+        const s = map({
+          [sym]: p.int
+        })
+        expect(s.conform({
+          [sym]: "1"
+        })).to.equal(invalid)
+      })
+
+      it("[missing required symbol key]", () => {
+        const sym = Symbol()
+        const s = map({
+          [sym]: p.int
+        })
+        expect(s.conform({
+          "sym": 1
+        })).to.equal(invalid)
+      })
 
       generateConformTests(TEST_DATA, (test) => spec.conform(test.value))
 
