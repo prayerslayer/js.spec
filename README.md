@@ -11,7 +11,7 @@ This is the second part of the READMe. First part will be added as soon as I can
 1. <strike>Predicates</strike>
 1. Specs
   * <strike>Tuple</strike>
-  * Map
+  * <strike>Map</strike>
   * Collection
   * And, Or
   * Function
