@@ -15,7 +15,7 @@ This is the second part of the READMe. First part will be added as soon as I can
   * Collection
   * And, Or
   * Function
-1. Spec Registry
+1. <strike>Spec Registry</strike>
 1. Sequences
 1. Generators
 
