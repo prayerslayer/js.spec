@@ -59,7 +59,7 @@ describe("tuple", () => {
       expect(notAnArray).to.be.an("array").and.to.have.length(1)
       expect(notAnArray[0], "notAnArray").to.have.keys("path", "via", "predicate", "value")
       expect(notAnArray[0].path, "notAnArray").to.deep.equal(path)
-      expect(notAnArray[0].via, "notAnArray").to.deep.equal(via)
+      expect(notAnArray[0].via, "notAnArray").to.deep.equal(["Tuple(isInteger, isInteger)"])
       expect(notAnArray[0], "notAnArray").to.have.property("value", "string")
       expect(notAnArray[0].predicate, "notAnArray").to.be.a("function")
 
@@ -67,7 +67,7 @@ describe("tuple", () => {
       expect(missingValue).to.be.an("array").and.to.have.length(1)
       expect(missingValue[0], "missingValue").to.have.keys("path", "via", "predicate", "value")
       expect(missingValue[0].path, "missingValue").to.deep.equal(path)
-      expect(missingValue[0].via, "missingValue").to.deep.equal(via)
+      expect(missingValue[0].via, "missingValue").to.deep.equal(["Tuple(isInteger, isInteger)"])
       expect(missingValue[0].value, "missingValue").to.deep.equal([0])
       expect(missingValue[0].predicate, "missingValue").to.be.a("function")
 
@@ -75,7 +75,7 @@ describe("tuple", () => {
       expect(extraValue, "extraValue").to.be.an("array").and.to.have.length(1)
       expect(extraValue[0], "extraValue").to.have.keys("path", "via", "predicate", "value")
       expect(extraValue[0].path, "extraValue").to.deep.equal(path)
-      expect(extraValue[0].via, "extraValue").to.deep.equal(via)
+      expect(extraValue[0].via, "extraValue").to.deep.equal(["Tuple(isInteger, isInteger)"])
       expect(extraValue[0].value, "extraValue").to.deep.equal([0, 0, 0])
       expect(extraValue[0].predicate, "extraValue").to.be.a("function")
 
@@ -83,7 +83,7 @@ describe("tuple", () => {
       expect(wrongValue, "wrongValue").to.be.an("array").and.to.have.length(1)
       expect(wrongValue[0], "wrongValue").to.have.keys("path", "via", "predicate", "value")
       expect(wrongValue[0].path, "wrongValue").to.deep.equal([0])
-      expect(wrongValue[0].via, "wrongValue").to.deep.equal(["Tuple(isInteger, isInteger)"])
+      expect(wrongValue[0].via, "wrongValue").to.deep.equal(["Tuple(isInteger, isInteger)", "isInteger"])
       expect(wrongValue[0].value, "wrongValue").to.deep.equal("0")
       expect(wrongValue[0].predicate, "wrongValue").to.be.a("function")
     })
@@ -99,7 +99,7 @@ describe("tuple", () => {
       const missingValue = explainData(line, [[0, 0]])
       expect(missingValue[0], "missingValue").to.have.keys("path", "via", "predicate", "value")
       expect(missingValue[0].path, "missingValue").to.deep.equal([])
-      expect(missingValue[0].via, "missingValue").to.deep.equal([])
+      expect(missingValue[0].via, "missingValue").to.deep.equal(["Tuple(Tuple(isInteger, isInteger), Tuple(isInteger, isInteger))"])
       expect(missingValue[0].value, "missingValue").to.deep.equal([[0, 0]])
       expect(missingValue[0].predicate, "missingValue").to.be.a("function")
 
@@ -108,7 +108,8 @@ describe("tuple", () => {
       expect(wrongValue[0], "wrongValue").to.have.keys("path", "via", "predicate", "value")
       expect(wrongValue[0].via, "wrongValue").to.deep.equal([
         "Tuple(Tuple(isInteger, isInteger), Tuple(isInteger, isInteger))",
-        "Tuple(isInteger, isInteger)"
+        "Tuple(isInteger, isInteger)",
+        "isInteger"
       ])
       expect(wrongValue[0].path, "wrongValue").to.deep.equal([1, 0])
       expect(wrongValue[0].value, "wrongValue").to.deep.equal("0")
@@ -127,7 +128,7 @@ describe("tuple", () => {
       const missingValue = explainData(line, [[0, 0]])
       expect(missingValue[0], "missingValue").to.have.keys("path", "via", "predicate", "value")
       expect(missingValue[0].path, "missingValue").to.deep.equal([])
-      expect(missingValue[0].via, "missingValue").to.deep.equal([])
+      expect(missingValue[0].via, "missingValue").to.deep.equal(["Tuple(Point, Point)"])
       expect(missingValue[0].value, "missingValue").to.deep.equal([[0, 0]])
       expect(missingValue[0].predicate, "missingValue").to.be.a("function")
 
@@ -136,7 +137,8 @@ describe("tuple", () => {
       expect(wrongValue[0], "wrongValue").to.have.keys("path", "via", "predicate", "value")
       expect(wrongValue[0].via, "wrongValue").to.deep.equal([
         "Tuple(Point, Point)",
-        "Point"
+        "Point",
+        "isInteger"
       ])
       expect(wrongValue[0].path, "wrongValue").to.deep.equal([1, 0])
       expect(wrongValue[0].value, "wrongValue").to.deep.equal("0")

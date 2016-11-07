@@ -129,7 +129,7 @@ describe("map", () => {
           .that.deep.equals(["name"])
         expect(invalidKey)
           .to.have.deep.property("[0].via")
-          .that.deep.equals(["Map"])
+          .that.deep.equals(["Map", "isString"])
         expect(invalidKey)
           .to.have.deep.property("[0].value")
           .that.deep.equals({
