@@ -5,8 +5,6 @@
 
 clojure.spec for Javascript
 
-This is the second part of the READMe. First part will be added as soon as I can log into the other computer again.
-
 # MVP Roadmap & Status
 
 1. <strike>Predicates</strike>
@@ -20,9 +18,143 @@ This is the second part of the READMe. First part will be added as soon as I can
 1. Sequences
 1. Generators
 
+# Rationale
+
+You want to make sure that data you are about to process conforms to what you expect it to be. Consider a function `fibonacci`, in the simplest case. It can only work on a positive number.
+
+    fibonacci(10)
+    => 55
+    fibonacci(-5)
+    => ???
+    fibonacci("five")
+    => ???????
+    fibonacci({ isRecursionExercise: false })
+    => "please stop"
+
+There are currently three ways to do make sure your function is only called with certain parameters. If none of these are appealing for your project, `js.spec` is for you.
+
+## DIY
+
+~~~ javascript
+function fibonacci(pos) {
+  if (typeof pos !== "number") {
+    throw new Error("what are you doing")
+  }
+  //...
+}
+~~~
+
+This gets repetitive when you have many functions working on the same data.
+
+## Static analysis tools
+
+Like [Flow](https://flowtype.org/).
+
+~~~ javascript
+// @flow
+function fibonacci(x): number {
+  //...
+}
+~~~
+
+It can infer some stuff without annotations, but once you add type annotations you also need a babel plugin to transform it to valid Javascript.
+
+## Typescript
+
+This is not Javascript anymore.
+
+# Examples
+
+**TODO**
+
+* Sharing knowledge about domain objects between client and server
+* Other :grin:
+
 # Usage
 
-** ATTENTION MAY CHANGE **
+**ATTENTION: WILL CHANGE, DOES NOT REPRESENT CURRENT STATE** I just wrote this to get a feeling for the API.
+
+## Predicates
+
+~~~ javascript
+import spec, {predicates as p} from 'js-spec'
+
+spec.conform(p.even, 10)
+// => 10
+
+spec.valid(p.even, 10)
+// => true
+
+spec.valid(p.null, null) // => true
+spec.valid(p.string, "abc") // => true
+spec.valid(x => x % 5 === 0, 10) // => true
+spec.valid(x => x % 5 === 0, 7) // => false
+spec.valid(new Set(["club", "diamond", "heart", "spade"]), "club") // => true
+spec.valid(new Set(["club", "diamond", "heart", "spade"]), 42) // => false
+~~~
+
+## Registry
+
+~~~ javascript
+import spec from 'js-spec'
+
+const SUIT = Symbol("SUIT")
+
+spec.define(SUIT, new Set(["club", "diamond", "heart", "spade"]))
+
+spec.valid(SUIT, "club") // => true
+spec.conform(SUIT, "club") // => "club"
+~~~
+
+## Composition
+
+~~~ javascript
+import spec, { predicates as p } from 'js-spec'
+
+const BIG_EVEN  = Symbol("BIG_EVEN")
+
+spec.define(BIG_EVEN, p.and(p.int, p.even, x => x > 1000))
+spec.valid(BIG_EVEN, "foo") // => false
+spec.valid(BIG_EVEN, 10) // => false
+spec.valid(BIG_EVEN, 100000) // => true
+
+const NAME_OR_ID = Symbol("NAME_OR_ID")
+
+spec.define(NAME_OR_ID, p.or({
+  name: p.string,
+  id: p.int
+}))
+spec.valid(NAME_OR_ID, "abc") // => true
+spec.valid(NAME_OR_ID, 100) // => true
+spec.valid(NAME_OR_ID, false) // => false
+
+spec.conform(NAME_OR_ID, "abc") // => {name: "abc"}
+~~~
+
+## Nullables
+
+~~~ javascript
+import spec, { predicates as p } from 'js-spec'
+
+spec.valid(p.string, null) // => false
+spec.valid(p.nullable(p.string), null) // => true
+~~~
+
+## Explain
+
+~~~ javascript
+import spec from 'js-spec'
+
+spec.explain(SUIT, 42)
+/*
+{
+  value: 42,
+  valid: false,
+  spec: SUIT,
+  predicate: function()...
+}
+*/
+~~~
 
 ## Entity maps
 
