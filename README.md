@@ -11,7 +11,7 @@ clojure.spec for Javascript
 1. Specs
   * <strike>Tuple</strike>
   * <strike>Map</strike>
-  * Collection
+  * <strike>Collection</strike>
   * And, Or
   * Function
 1. <strike>Spec Registry</strike>
