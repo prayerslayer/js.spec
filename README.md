@@ -12,11 +12,11 @@ clojure.spec for Javascript
   * <strike>Tuple</strike>
   * <strike>Map</strike>
   * <strike>Collection</strike>
-  * And, Or
-  * Function
+  * <strike>And, Or</strike>
+  * Sequences (`cat`, `alt`, `every`)
 1. <strike>Spec Registry</strike>
-1. Sequences
-1. Generators
+1. Function Specs (???)
+1. Generators (???)
 
 # Rationale
 

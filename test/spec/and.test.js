@@ -6,19 +6,19 @@ import { explainData } from '../../lib/util'
 import { invalid, optional } from '../../lib/symbols'
 import { define, _clear } from '../../lib/registry'
 
+const friend = map({
+  name: p.string
+})
+const positioned = map({
+  lat: p.number,
+  lon: p.number
+})
+const positioned_friend = and(positioned, friend)
+const big_even = and(p.int, p.even, x => x > 1000)
+
 describe("and", () => {
   describe("explain", () => {
-
     describe("works on specs", () => {
-      const friend = map({
-        name: p.string
-      })
-      const positioned = map({
-        lat: p.number,
-        lon: p.number
-      })
-      const positioned_friend = and(positioned, friend)
-
       it("[not a friend]", () => {
         const value = {
           lat: 13,
@@ -90,8 +90,6 @@ describe("and", () => {
     })
 
     describe("works on predicates", () => {
-      const big_even = and(p.int, p.even, x => x > 1000)
-
       it("[not an int]", () => {
         const problems = explainData(big_even, "1002")
         expect(problems).to.be.an("array")
@@ -146,7 +144,6 @@ describe("and", () => {
   })
   describe("conform", () => {
     it("works on predicates", () => {
-      const big_even = and(p.int, p.even, x => x > 1000)
       expect(big_even.conform("1002"), "not an int").to.equal(invalid)
       expect(big_even.conform(1000), "not big").to.equal(invalid)
       expect(big_even.conform(1001), "not even").to.equal(invalid)
@@ -154,15 +151,6 @@ describe("and", () => {
     })
 
     it("works on specs", () => {
-      const friend = map({
-        name: p.string
-      })
-      const positioned = map({
-        lat: p.number,
-        lon: p.number
-      })
-      const positioned_friend = and(positioned, friend)
-
       const luis = {
         name: "luis",
         lat: 13,
