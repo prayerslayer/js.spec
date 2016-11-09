@@ -80,7 +80,7 @@ spec.valid(point, p2)
 // but which point spec did it match?
 spec.conform(point, p2)
 // => [ '2d', { x: 0, y: 0 } ]
-~~~ 
+~~~
 
 # License
 
