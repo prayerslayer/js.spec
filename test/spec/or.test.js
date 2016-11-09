@@ -13,8 +13,14 @@ const positioned = map({
   lat: p.number,
   lon: p.number
 })
-const positioned_friend = or(positioned, friend)
-const big_even = or(p.even, x => p.number(x) && x > 1000) // thanks, JS type coercion
+const positioned_friend = or({
+  positioned,
+  friend
+})
+const big_even = or({
+  even: p.even,
+  big: x => p.number(x) && x > 1000 // thanks, JS type coercion
+})
 
 describe("or", () => {
   describe("explain", () => {
@@ -32,7 +38,8 @@ describe("or", () => {
         // problem with position spec
         expect(problems).to.have.deep.property("[0].via")
           .that.deep.equals([
-          "Or(Map, Map)",
+          "Or(positioned, friend)",
+          "positioned",
           "Map",
           "Keys(lat, lon)"
         ])
@@ -46,7 +53,8 @@ describe("or", () => {
         // problem with friend spec
         expect(problems).to.have.deep.property("[1].via")
           .that.deep.equals([
-          "Or(Map, Map)",
+          "Or(positioned, friend)",
+          "friend",
           "Map",
           "isString"
         ])
@@ -63,9 +71,15 @@ describe("or", () => {
   describe("conform", () => {
     it("works on predicates", () => {
       expect(big_even.conform("1002"), "not an int").to.equal(invalid)
-      expect(big_even.conform(1000), "not big, but even").to.equal(1000)
-      expect(big_even.conform(1001), "not even, but big").to.equal(1001)
-      expect(big_even.conform(1002), "both").to.equal(1002)
+      expect(big_even.conform(1000), "not big, but even").to.deep.equal({
+        even: 1000
+      })
+      expect(big_even.conform(1001), "not even, but big").to.deep.equal({
+        big: 1001
+      })
+      expect(big_even.conform(1002), "both").to.deep.equal({
+        even: 1002
+      })
       expect(big_even.conform(999), "neither").to.equal(invalid)
     })
 
@@ -77,7 +91,9 @@ describe("or", () => {
       }
       expect(positioned_friend.conform(luis),
         "conforms to both specs")
-        .to.deep.equal(luis)
+        .to.deep.equal({
+        positioned: luis
+      })
 
       const anon = {
         lat: 13,
@@ -85,7 +101,9 @@ describe("or", () => {
       }
       expect(positioned_friend.conform(anon),
         "not a friend, but positioned")
-        .to.deep.equal(anon)
+        .to.deep.equal({
+        positioned: anon
+      })
 
       const pos = {
         name: "chris",
@@ -93,7 +111,9 @@ describe("or", () => {
       }
       expect(positioned_friend.conform(pos),
         "not positioned, but a friend")
-        .to.deep.equal(pos)
+        .to.deep.equal({
+        friend: pos
+      })
 
       expect(positioned_friend.conform({
         name: 13,
