@@ -64,9 +64,9 @@ spec.valid(point, p)
 
 // what is wrong?
 spec.explain(point, p)
-// value fails spec via Or(2d, 3d), 2d, Map, Keys(x, y) at [y]: hasKey failed for undefined
-// value fails spec via Or(2d, 3d), 3d, Map, Keys(x, y, z) at [y]: hasKey failed for undefined
-// value fails spec via Or(2d, 3d), 3d, Map, Keys(x, y, z) at [z]: hasKey failed for undefined
+// value fails spec via Or(2d, 3d-ish), 2d, Map, Keys(x, y) at [y]: hasKey failed for undefined
+// value fails spec via Or(2d, 3d-ish), 3d-ish, Map, Keys(x, y) at [y]: hasKey failed for undefined
+
 
 // let's try again
 const p2 = {
