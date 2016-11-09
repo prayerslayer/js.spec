@@ -5,248 +5,83 @@
 
 clojure.spec for Javascript
 
-# MVP Roadmap & Status
-
-1. <strike>Predicates</strike>
-1. Specs
-  * <strike>Tuple</strike>
-  * <strike>Map</strike>
-  * <strike>Collection</strike>
-  * <strike>And, Or</strike>
-  * Sequences (`cat`, `alt`, `every`)
-1. <strike>Spec Registry</strike>
-1. Function Specs (???)
-1. Generators (???)
-
 # Rationale
 
-You want to make sure that data you are about to process conforms to what you expect it to be. Consider a function `fibonacci`, in the simplest case. It can only work on a positive number.
+So there is [`clojure.spec`](http://clojure.org/about/spec), a part of Clojure's core library that is intended to help with specification, testing and error messages. I really urge you to read the linked rationale, you will get the gist even without knowledge of Clojure. In any case here's my best attempt of a summary:
 
-    fibonacci(10)
-    => 55
-    fibonacci(-5)
-    => ???
-    fibonacci("five")
-    => ???????
-    fibonacci({ isRecursionExercise: false })
-    => "please stop"
+In a dynamic language like Javascript or Clojure it's common to represent information with data. For instance, the score of a soccer match could be encoded in a list of two integers `[0, 1]`. (Whereas in a static language like Java you would do this with an instance of a `SoccerScore` class with `home` and `away` members.) This information is passed around between modules of your code or sent to external systems, yet the knowledge about what this list of integers stands for is not available anywhere. It's maybe in your likely outdated documentation, but mostly it is implicitly assumed in your code (`var goals_scored = score[0] + score[1];`). If the meaning changes, your code breaks.
 
-There are currently three ways to do make sure your function is only called with certain parameters. If none of these are appealing for your project, `js.spec` is for you.
+One way to mitigate this is by static analysis tools ([Flow](https://github.com/facebook/flow)) or typed languages ([Typescript](https://www.typescriptlang.org/)), but they only get you so far. For instance they don't work at runtime (duh!) and offer limited expressiveness. (They also require additional tooling, but that's another topic.) So what you're left is manual parsing and checking, but that is repetitive and half-assed at worst (`if (!Array.isArray(score)) ...`), and non-standard at best, ie. there is no way for users of your function to know where exactly their provided input failed your specification.
 
-## DIY
+`js.spec` tries to solve those problems.
 
-~~~ javascript
-function fibonacci(pos) {
-  if (typeof pos !== "number") {
-    throw new Error("what are you doing")
-  }
-  //...
-}
-~~~
+# Implementation Status
 
-This gets repetitive when you have many functions working on the same data.
+* Specs
+  * ✅ Map
+  * ✅ Collection
+  * Combination
+    * ✅ And
+    * ✅ Or
+  * ✅ Tuple
+* ✅ Spec Registry
+* 😓 Spec Regexes (`cat`, `alt`, `*`, `?`, `+`)
+* 😰 Generator Functions
+* 😫 Function Specs (Not even sure yet it's possible the way it works in `clojure.spec`)
 
-## Static analysis tools
+## Why not use Clojurescript?
 
-Like [Flow](https://flowtype.org/).
+If you thought about using CLJS already, go ahead. `clojure.spec` is already available there. However if you meant to pull in CLJS as dependency: `clojure.spec` is macro-heavy. Macros exist only at compile-time, so all the "functions" (they are macros) are gone.
 
-~~~ javascript
-// @flow
-function fibonacci(x): number {
-  //...
-}
-~~~
+# Usage Example
 
-It can infer some stuff without annotations, but once you add type annotations you also need a babel plugin to transform it to valid Javascript.
-
-## Typescript
-
-This is not Javascript anymore.
-
-# Examples
-
-**TODO**
-
-* Sharing knowledge about domain objects between client and server
-* Other :grin:
-
-# Usage
-
-**ATTENTION: WILL CHANGE, DOES NOT REPRESENT CURRENT STATE** I just wrote this to get a feeling for the API.
-
-## Predicates
+**ATTENTION** API is definitely going to change. Currently I just export everything.
 
 ~~~ javascript
-import spec, {predicates as p} from 'js-spec'
+import * as spec from 'js.spec'
 
-spec.conform(p.even, 10)
-// => 10
-
-spec.valid(p.even, 10)
-// => true
-
-spec.valid(p.null, null) // => true
-spec.valid(p.string, "abc") // => true
-spec.valid(x => x % 5 === 0, 10) // => true
-spec.valid(x => x % 5 === 0, 7) // => false
-spec.valid(new Set(["club", "diamond", "heart", "spade"]), "club") // => true
-spec.valid(new Set(["club", "diamond", "heart", "spade"]), 42) // => false
-~~~
-
-## Registry
-
-~~~ javascript
-import spec from 'js-spec'
-
-const SUIT = Symbol("SUIT")
-
-spec.define(SUIT, new Set(["club", "diamond", "heart", "spade"]))
-
-spec.valid(SUIT, "club") // => true
-spec.conform(SUIT, "club") // => "club"
-~~~
-
-## Composition
-
-~~~ javascript
-import spec, { predicates as p } from 'js-spec'
-
-const BIG_EVEN  = Symbol("BIG_EVEN")
-
-spec.define(BIG_EVEN, p.and(p.int, p.even, x => x > 1000))
-spec.valid(BIG_EVEN, "foo") // => false
-spec.valid(BIG_EVEN, 10) // => false
-spec.valid(BIG_EVEN, 100000) // => true
-
-const NAME_OR_ID = Symbol("NAME_OR_ID")
-
-spec.define(NAME_OR_ID, p.or({
-  name: p.string,
-  id: p.int
-}))
-spec.valid(NAME_OR_ID, "abc") // => true
-spec.valid(NAME_OR_ID, 100) // => true
-spec.valid(NAME_OR_ID, false) // => false
-
-spec.conform(NAME_OR_ID, "abc") // => {name: "abc"}
-~~~
-
-## Nullables
-
-~~~ javascript
-import spec, { predicates as p } from 'js-spec'
-
-spec.valid(p.string, null) // => false
-spec.valid(p.nullable(p.string), null) // => true
-~~~
-
-## Explain
-
-~~~ javascript
-import spec from 'js-spec'
-
-spec.explain(SUIT, 42)
-/*
-{
-  value: 42,
-  valid: false,
-  spec: SUIT,
-  predicate: function()...
-}
-*/
-~~~
-
-## Entity maps
-
-~~~ javascript
-import spec, { predicates as p } from 'js-spec'
-
-const EMAIL = Symbol("EMAIL")
-const ACCOUNT_ID = Symbol("ACCOUNT_ID")
-const FIRST_NAME = Symbol("FIRST_NAME")
-const LAST_NAME = Symbol("LAST_NAME")
-const PHONE = Symbol("PHONE")
-const PERSON = Symbol("PERSON")
-
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/
-
-spec.define(PHONE, p.and(p.string, x => /^+?[0-9]+/))
-spec.define(EMAIL, p.and(p.string, x => emailRegex.test(x)))
-spec.define(FIRST_NAME, p.string)
-spec.define(LAST_NAME, p.string)
-spec.define(PERSON, {
-  email: EMAIL,
-  firstName: FIRST_NAME,
-  lastName: LAST_NAME,
-  [p.optionalKeys]: {
-    phoneNumber: PHONE
-  }
-}
-
-const ANIMAL_KIND = Symbol("ANIMAL_KIND")
-const ANIMAL_SAYS = Symbol("ANIMAL_SAYS")
-const ANIMAL_COMMON = Symbol("ANIMAL_COMMON")
-const DOG_TAIL = Symbol("DOG_TAIL")
-const DOG_BREED = Symbol("DOG_BREED")
-const ANIMAL_DOG = Symbol("ANIMAL_DOG")
-
-spec.define(ANIMAL_KIND, p.string)
-spec.define(ANIMAL_SAYS, p.string)
-// note the difference between symbol and string keys
-spec.define(ANIMAL_COMMON, p.keys({
-  "animal_kind": ANIMAL_KIND,
-  ANIMAL_SAYS
-}))
-spec.define(DOG_TAIL, p.boolean)
-spec.define(DOG_BREED, p.string)
-spec.define(ANIMAL_DOG, p.merge(ANIMAL_COMMON, p.keys({DOG_TAIL, DOG_BREED})))
-
-spec.valid(ANIMAL_DOG, {
-  animal_kind: "dog",
-  [ANIMAL_SAYS]: "woof",
-  [DOG_TAIL]: true,
-  [DOG_BREED]: "retriever"
+const point_2d = spec.map({
+  x: spec.int,
+  y: spec.int
 })
-// => true
-~~~
+const point_maybe_3d = spec.map({
+  x: spec.int,
+  y: spec.int,
+  [spec.optional]: {
+    z: spec.int
+  }
+})
+const point = spec.or({
+  "2d": point_2d,
+  "3d-ish": point_maybe_3d
+})
 
-## Collections
-
-~~~ javascript
-import spec, { predicates as p} from 'js-spec'
-
-spec.conform(p.collOf(p.int), [1, 2, 3, 4])
-// => [1, 2, 3, 4]
-spec.conform(p.collOf(p.string), new Set(["foo", "bar"]))
-// => Set { 'foo', 'bar' }
-
-spec.valid(p.collOf(p.string, { [p.count]: 2 }), ["one"])
+const p = {
+  x: 0
+}
+spec.valid(point, p)
 // => false
 
-// accepted options for collOf
-// [p.length]: exact size,
-// [p.minLength],
-// [p.maxLength],
-// [p.distinct]
-~~~
+// what is wrong?
+spec.explain(point, p)
+// value fails spec via Or(2d, 3d), 2d, Map, Keys(x, y) at [y]: hasKey failed for undefined
+// value fails spec via Or(2d, 3d), 3d, Map, Keys(x, y, z) at [y]: hasKey failed for undefined
+// value fails spec via Or(2d, 3d), 3d, Map, Keys(x, y, z) at [z]: hasKey failed for undefined
 
-~~~ javascript
-import spec, { predicates as p} from 'js-spec'
+// let's try again
+const p2 = {
+  x: 0,
+  y: 0
+}
 
-const POINT = Symbol()
-spec.define(POINT, p.tuple(p.double, p.double, p.double))
-spec.valid(POINT, [1.5, 2.5, -0.5])
+spec.valid(point, p2)
 // => true
-~~~
 
-~~~ javascript
-import spec, { predicates as p} from 'js-spec'
+// but which point spec did it match?
+spec.conform(point, p2)
+// => [ '2d', { x: 0, y: 0 } ]
+~~~ 
 
-const SCORES = Symbol()
-spec.define(SCORES, p.mapOf(p.string, p.int)
-spec.valid(SCORES, {
-  harry: 10,
-  sally: 5
-})
-// => true
-~~~
+# License
+
+MIT, see [LICENSE](LICENSE.md)
