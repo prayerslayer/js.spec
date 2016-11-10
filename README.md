@@ -23,15 +23,17 @@ One way to mitigate this is by static analysis tools ([Flow](https://github.com/
 
 # Implementation Status
 
-The 0.0.x published versions should seen as developer previews. Code may or may not work. API may or may not witness breaking changes (it will).
+The 0.0.x published versions should be seen as developer previews. Code may or may not work. API may or may not witness breaking changes (it will).
 
 * Specs
+  * ✅ Primitives
   * ✅ Map
   * ✅ Collection
   * Combination
     * ✅ And
     * ✅ Or
   * ✅ Tuple
+  * ✅ Nilable
 * ✅ Spec Registry
 * :construction: Spec Regexes (`cat`, `alt`, `*`, `?`, `+`)
 * 😰 Generator Functions
