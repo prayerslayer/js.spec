@@ -9,3 +9,4 @@ coverage
 example.js
 LICENSE
 README.md
+webpack.config.js

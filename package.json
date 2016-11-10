@@ -4,7 +4,8 @@
   "description": "clojure.spec for Javascript",
   "main": "dist/js.spec.js",
   "scripts": {
-    "prepublish": "webpack --config webpack.config.js -p",
+    "build": "webpack --config webpack.config.js -p",
+    "prepublish": "npm run build",
     "test": "mocha --recursive --compilers js:babel-register test",
     "test:watch": "mocha --recursive --reporter=min --watch --compilers js:babel-register test",
     "coverage": "babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha -- test --recursive",
