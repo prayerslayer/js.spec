@@ -40,33 +40,30 @@ If you already thought about using CLJS, go ahead. `clojure.spec` is already ava
 ~~~ javascript
 import * as spec from 'js.spec'
 
-const point_2d = spec.map({
+const point = spec.map({
   x: spec.int,
   y: spec.int
 })
-const point_maybe_3d = spec.map({
-  x: spec.int,
-  y: spec.int,
-  [spec.optional]: {
-    z: spec.int
-  }
+const line = spec.map({
+  p1: point,
+  p2: point
 })
-const point = spec.or({
-  "2d": point_2d,
-  "3d-ish": point_maybe_3d
+const point_or_line = spec.or({
+  point,
+  line
 })
 
 const p = {
   x: 0
 }
-spec.valid(point, p)
+spec.valid(point_or_line, p)
 // => false
 
 // what is wrong?
-spec.explain(point, p)
-// value fails spec via Or(2d, 3d-ish), 2d, Map, Keys(x, y) at [y]: hasKey failed for undefined
-// value fails spec via Or(2d, 3d-ish), 3d-ish, Map, Keys(x, y) at [y]: hasKey failed for undefined
-
+spec.explain(point_or_line, p)
+// value fails spec via Or(point, line), point, Map, Keys(x, y) at [y]: hasKey failed for undefined
+// value fails spec via Or(point, line), line, Map, Keys(p1, p2) at [p1]: hasKey failed for undefined
+// value fails spec via Or(point, line), line, Map, Keys(p1, p2) at [p2]: hasKey failed for undefined
 
 // let's try again
 const p2 = {
@@ -74,12 +71,12 @@ const p2 = {
   y: 0
 }
 
-spec.valid(point, p2)
+spec.valid(point_or_line, p2)
 // => true
 
-// but which point spec did it match?
-spec.conform(point, p2)
-// => [ '2d', { x: 0, y: 0 } ]
+// but which spec did it match?
+spec.conform(point_or_line, p2)
+// => [ 'point', { x: 0, y: 0 } ]
 ~~~
 
 # License
