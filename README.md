@@ -25,7 +25,7 @@ One way to mitigate this is by static analysis tools ([Flow](https://github.com/
     * ✅ Or
   * ✅ Tuple
 * ✅ Spec Registry
-* 😓 Spec Regexes (`cat`, `alt`, `*`, `?`, `+`)
+* :construction: Spec Regexes (`cat`, `alt`, `*`, `?`, `+`)
 * 😰 Generator Functions
 * 😫 Function Specs (Not even sure if it's possible the way it works in `clojure.spec`)
 

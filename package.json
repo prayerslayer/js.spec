@@ -2,8 +2,9 @@
   "name": "js.spec",
   "version": "0.0.1",
   "description": "clojure.spec for Javascript",
-  "main": "index.js",
+  "main": "dist/js.spec.js",
   "scripts": {
+    "prepublish": "webpack --config webpack.config.js -p",
     "test": "mocha --recursive --compilers js:babel-register test",
     "test:watch": "mocha --recursive --reporter=min --watch --compilers js:babel-register test",
     "coverage": "babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha -- test --recursive",
@@ -23,12 +24,14 @@
     "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-istanbul": "^0.11.0",
+    "babel-loader": "^6.2.7",
     "babel-plugin-transform-es2015-spread": "^6.8.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-register": "^6.18.0",
     "chai": "^3.5.0",
     "coveralls": "^2.11.14",
-    "mocha": "^3.1.2"
+    "mocha": "^3.1.2",
+    "webpack": "2.1.0-beta.25"
   },
   "dependencies": {
     "lodash.flattendeep": "^4.4.0",
