@@ -5,6 +5,12 @@
 
 clojure.spec for Javascript
 
+# Installation
+
+    npm install js.spec
+
+For usage examples see [Usage](#usage).
+
 # Rationale
 
 So there is [`clojure.spec`](http://clojure.org/about/spec), a part of Clojure's core library that is intended to help with specification, testing and error messages. I really urge you to read the linked rationale, you will get the gist even without knowledge of Clojure. In any case here's my best attempt of a summary:
@@ -16,6 +22,8 @@ One way to mitigate this is by static analysis tools ([Flow](https://github.com/
 `js.spec` tries to solve those problems.
 
 # Implementation Status
+
+The 0.0.x published versions should seen as developer previews. Code may or may not work. API may or may not witness breaking changes (it will).
 
 * Specs
   * ✅ Map
@@ -33,9 +41,7 @@ One way to mitigate this is by static analysis tools ([Flow](https://github.com/
 
 If you already thought about using CLJS, go ahead. `clojure.spec` is already available there. However if you meant to pull in CLJS as a dependency: `clojure.spec` is macro-heavy. Macros exist only at compile-time, so all the "functions" (they are macros) are gone.
 
-# Usage Example
-
-**ATTENTION** API is definitely going to change. Currently I just export everything.
+# Usage
 
 ~~~ javascript
 import * as spec from 'js.spec'
@@ -61,9 +67,9 @@ spec.valid(point_or_line, p)
 
 // what is wrong?
 spec.explain(point_or_line, p)
-// value fails spec via Or(point, line), point, Map, Keys(x, y) at [y]: hasKey failed for undefined
-// value fails spec via Or(point, line), line, Map, Keys(p1, p2) at [p1]: hasKey failed for undefined
-// value fails spec via Or(point, line), line, Map, Keys(p1, p2) at [p2]: hasKey failed for undefined
+// Or(point, line) -> point -> Map -> Keys(x, y): hasKey failed for undefined at [y].
+// Or(point, line) -> line -> Map -> Keys(p1, p2): hasKey failed for undefined at [p1].
+// Or(point, line) -> line -> Map -> Keys(p1, p2): hasKey failed for undefined at [p2].
 
 // let's try again
 const p2 = {

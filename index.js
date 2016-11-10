@@ -20,6 +20,6 @@ export function explain(spec, value) {
       return problem
     })
     .forEach(problem => {
-      console.log(`value fails spec via ${problem.via.join(", ")} at [${problem.path.join(", ")}]: ${problem.predicateName} failed for ${getIn(value, problem.path)}`)
+      console.log(`${problem.via.join(" -> ")}: ${problem.predicateName} failed for ${getIn(value, problem.path)} at [${problem.path.join(", ")}].`)
     })
 }
