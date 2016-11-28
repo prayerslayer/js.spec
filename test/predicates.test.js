@@ -3,9 +3,12 @@ import * as p from '../lib/predicates'
 
 describe("predicate", () => {
   describe("number", () => {
-    [-10, 0, 10, 20000, 3.14, 1 / 2, Infinity, -Infinity].forEach(nr => it(`returns true for ${nr}`, () => {
+    [-10, 0, 10, 20000, 3.14, 1 / 2, Number.MAX_VALUE, Number.MIN_VALUE].forEach(nr => it(`returns true for ${nr}`, () => {
       expect(p.number(nr)).to.be.true
-    }))
+    }));
+    [-Infinity, Infinity, true, false, "string", {}, [], null, undefined].forEach(nr => it(`returns false for ${nr}`, () => {
+      expect(p.number(nr)).to.be.false
+    }));
   })
 })
 
