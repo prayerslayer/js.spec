@@ -1,4 +1,4 @@
-import * as spec from './index'
+import { spec, valid, explain, conform } from './index'
 
 const point = spec.map({
   x: spec.int,
@@ -16,11 +16,11 @@ const point_or_line = spec.or({
 const p = {
   x: 0
 }
-spec.valid(point_or_line, p)
+valid(point_or_line, p)
 // => false
 
 // what is wrong?
-spec.explain(point_or_line, p)
+explain(point_or_line, p)
 // value fails spec via Or(point, line), point, Map, Keys(x, y) at [y]: hasKey failed for undefined
 // value fails spec via Or(point, line), line, Map, Keys(p1, p2) at [p1]: hasKey failed for undefined
 // value fails spec via Or(point, line), line, Map, Keys(p1, p2) at [p2]: hasKey failed for undefined
@@ -31,9 +31,9 @@ const p2 = {
   y: 0
 }
 
-spec.valid(point_or_line, p2)
+valid(point_or_line, p2)
 // => true
 
 // but which spec did it match?
-spec.conform(point_or_line, p2)
+conform(point_or_line, p2)
 // => [ 'point', { x: 0, y: 0 } ]
