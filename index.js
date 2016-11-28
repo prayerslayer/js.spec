@@ -1,13 +1,12 @@
 import * as util from './lib/util'
 import * as specs from './lib/spec'
 import * as predicates from './lib/predicates'
+import * as symbols from './lib/symbols'
 import getIn from 'lodash.get'
 
 const specsAndPreds = Object.assign({}, specs, predicates)
 
-export { specsAndPreds as spec }
-
-export * from './lib/symbols'
+export { specsAndPreds as spec, symbols as symbol }
 export * from './lib/registry'
 export { valid } from './lib/util'
 
