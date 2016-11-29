@@ -6,6 +6,10 @@
 
 clojure.spec for Javascript
 
+# Usage
+
+For a quick usage example see [example.js](example.js). Otherwise please refer to the documentation.
+
 # Documentation
 
 [https://prayerslayer.gitbooks.io/js-spec/content/](https://prayerslayer.gitbooks.io/js-spec/content/)
@@ -13,12 +17,12 @@ clojure.spec for Javascript
 # Installation
 
     npm install js.spec
-
-For a quick usage example see [example.js](example.js). Otherwise please refer to the documentation.
+    
+This will install the current version. A preview of the next major is available as `js.spec@next`.
 
 # Implementation Status
 
-The 0.0.x published versions should be seen as developer previews. Code may or may not work. API may or may not witness breaking changes (it will).
+The 0.0.x published versions should be seen as developer previews. Code may or may not work. API may or may not witness breaking changes.
 
 * Specs
   * ✅ Primitives
@@ -29,6 +33,7 @@ The 0.0.x published versions should be seen as developer previews. Code may or m
     * ✅ Or
   * ✅ Tuple
   * ✅ Nilable
+  * ✅ Enum
 * ✅ Spec Registry
 * :construction: Spec Regexes (`cat`, `alt`, `*`, `?`, `+`)
 * 😰 Generator Functions
