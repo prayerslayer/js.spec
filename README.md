@@ -18,7 +18,7 @@ For a quick usage example see [example.js](example.js). Otherwise please refer t
 
     npm install js.spec
     
-This will install the current version. A preview of the next major is available as `js.spec@next`.
+This will install the current release candidate, as there is no 1.0 yet.
 
 # Implementation Status
 
