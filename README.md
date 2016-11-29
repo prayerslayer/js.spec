@@ -14,7 +14,7 @@ clojure.spec for Javascript
 
     npm install js.spec
 
-For usage examples see [Usage](#usage).
+For a quick usage example see [example.js](example.js). Otherwise please refer to the documentation.
 
 # Implementation Status
 
