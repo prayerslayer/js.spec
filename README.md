@@ -22,7 +22,7 @@ For a quick usage example see [example.js](example.js). Otherwise please refer t
 
 # Documentation
 
-[https://prayerslayer.gitbooks.io/js-spec/content/](https://prayerslayer.gitbooks.io/js-spec/content/)
+[http://js-spec.online/](http://js-spec.online/)
 
 # Installation
 
