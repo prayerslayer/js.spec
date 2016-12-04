@@ -35,6 +35,7 @@
     "webpack": "2.1.0-beta.25"
   },
   "dependencies": {
+    "lodash.chunk": "^4.2.0",
     "lodash.flattendeep": "^4.4.0",
     "lodash.get": "^4.4.2",
     "lodash.isboolean": "^3.0.3",
