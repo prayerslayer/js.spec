@@ -10,3 +10,4 @@ example.js
 LICENSE
 README.md
 webpack.config.js
+dist/js.spec.bundle.js
