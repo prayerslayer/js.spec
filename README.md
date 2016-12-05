@@ -2,7 +2,7 @@
 
 clojure.spec for Javascript
 
-[![Latest build](https://travis-ci.org/prayerslayer/js.spec.svg)](https://travis-ci.org/prayerslayer/js.spec)
+[![Latest build](https://travis-ci.org/prayerslayer/js.spec.svg?branch=master)](https://travis-ci.org/prayerslayer/js.spec)
 [![Coverage Status](https://coveralls.io/repos/github/prayerslayer/js.spec/badge.svg?branch=master)](https://coveralls.io/github/prayerslayer/js.spec?branch=master)
 [![npm version](https://badge.fury.io/js/js.spec.svg)](https://badge.fury.io/js/js.spec)
 
