@@ -27,8 +27,21 @@ For a quick usage example see [example.js](example.js). Otherwise please refer t
 # Installation
 
     npm install js.spec
-    
+
 This will install the current release candidate, as there is no 1.0 yet.
+
+If you want to include it into a web page directly via `script`, please use the [UMD build](dist/js.spec.bundle.js) like this:
+
+~~~ html
+<script src="./js.spec.bundle.js" charset="utf-8"></script>
+<script type="text/javascript">
+  const {spec, valid} = window['js.spec']
+  const foo = spec.map({
+    name: spec.string
+  })
+  alert(valid(foo, {name: 'hugo'}))
+</script>
+~~~
 
 # Implementation Status
 

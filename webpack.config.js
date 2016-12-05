@@ -3,7 +3,8 @@ var path = require('path')
 var node_modules = fs.readdirSync('node_modules')
 
 
-module.exports = {
+module.exports = [{
+  // node library
   entry: './index.js',
   target: 'node',
   bail: true,
@@ -29,4 +30,30 @@ module.exports = {
     }]
   },
   plugins: []
-}
+}, {
+  // <script>
+  entry: './index.js',
+  target: 'web',
+  bail: true,
+  output: {
+    path: path.join(__dirname, 'dist'),
+    library: 'js.spec',
+    libraryTarget: 'umd',
+    filename: 'js.spec.bundle.js'
+  },
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: 'babel-loader',
+      query: {
+        presets: [
+          ['es2015', {
+            modules: false
+          }]
+        ]
+      }
+    }]
+  },
+  plugins: []
+}]
