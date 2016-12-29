@@ -8,11 +8,7 @@ const specsAndPreds = Object.assign({}, specs, predicates)
 
 export { specsAndPreds as spec, symbols as symbol }
 export * from './lib/registry'
-export { valid } from './lib/util'
-
-export function conform(spec, value) {
-  return (util.specize(spec)).conform(value)
-}
+export { valid, conform } from './lib/util'
 
 export function explainData(spec, value) {
   return util.explainData(spec, value)

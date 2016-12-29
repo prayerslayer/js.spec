@@ -32,6 +32,7 @@
     "chai": "^3.5.0",
     "coveralls": "^2.11.14",
     "mocha": "^3.1.2",
+    "pretty-format": "^18.0.0",
     "webpack": "2.1.0-beta.25"
   },
   "dependencies": {

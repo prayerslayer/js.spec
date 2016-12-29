@@ -3,7 +3,7 @@ import tuple from '../../lib/spec/tuple'
 import * as p from '../../lib/predicates'
 import { invalid } from '../../lib/symbols'
 import { explainData } from '../../lib/util'
-import { define, _clear } from '../../lib/registry'
+import { define } from '../../lib/registry'
 
 describe("tuple", () => {
   describe("conform", () => {
@@ -40,10 +40,6 @@ describe("tuple", () => {
       expect(line.conform([[0, 0], "string"]), "line value type mismatch").to.equal(invalid)
       expect(line.conform([[0, 0], [0, "0"]]), "point value type mismatch").to.equal(invalid)
       expect(line.conform("string"), "not an array").to.equal(invalid)
-    })
-
-    after(() => {
-      _clear()
     })
   })
 
