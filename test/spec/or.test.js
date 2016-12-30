@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import or from '../../lib/spec/or'
 import map from '../../lib/spec/map'
 import * as p from '../../lib/predicates'
-import { explainData } from '../../lib/util'
+import { explainData } from '../../index'
 import { invalid, optional } from '../../lib/symbols'
 import { define, _clear } from '../../lib/registry'
 

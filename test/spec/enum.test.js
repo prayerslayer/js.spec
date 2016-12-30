@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import oneOf from '../../lib/spec/enum'
 import * as p from '../../lib/predicates'
 import { invalid } from '../../lib/symbols'
-import { explainData } from '../../lib/util'
+import { explainData } from '../../index'
 
 describe("enum", () => {
   describe("conform", () => {
