@@ -25,5 +25,5 @@ export function explainData(spec, value) {
 
 export function explain(spec, value) {
   explainData(spec, value)
-    .forEach(problem => console.log(`${problem.via.join(" → ")}: ${problem.predicateName} failed for ${require('pretty-format')(getIn(value, problem.path))} at [${problem.path.join(", ")}].`))
+    .forEach(problem => console.log(`${problem.via.join(" → ")}: ${problem.predicateName} failed for ${getIn(value, problem.path)} at [${problem.path.join(", ")}].`))
 }
