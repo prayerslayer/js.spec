@@ -112,9 +112,10 @@ describe("alt", () => {
   })
 
   describe("explain", () => {
-    //TODO also use other spec ids
     it("[happy case]", () => {
-      const problems = explainData(ingredient_variation, ["spoons", 5])
+      const id = Symbol()
+      define(id, ingredient_variation)
+      const problems = explainData(id, ["spoons", 5])
       expect(problems).to.be.an("array").and.to.have.length(0)
     })
 

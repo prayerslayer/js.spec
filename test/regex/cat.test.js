@@ -122,7 +122,6 @@ describe("cat", () => {
   })
 
   describe("explain", () => {
-    //TODO also use other spec ids
     it("[happy case]", () => {
       const problems = explainData(weak_ingredient, ["spoons", 5])
       expect(problems).to.be.an("array").and.to.have.length(0)
