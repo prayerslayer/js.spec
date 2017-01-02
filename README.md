@@ -6,6 +6,8 @@ clojure.spec for Javascript
 [![Coverage Status](https://coveralls.io/repos/github/prayerslayer/js.spec/badge.svg?branch=master)](https://coveralls.io/github/prayerslayer/js.spec?branch=master)
 [![npm version](https://badge.fury.io/js/js.spec.svg)](https://badge.fury.io/js/js.spec)
 
+![logo](logo.png)
+
 There is [`clojure.spec`](http://clojure.org/about/spec), a part of Clojure's core library that is intended to help with specification, testing and error messages. I recommend you to read the linked rationale, you will get the gist even without knowledge of Clojure. In any case here's my best attempt of a summary:
 
 In a dynamic language like Javascript or Clojure it is common to represent information with data. For instance, you could encode the score of a soccer match with a list of two integers `[0, 1]`. (In a statically typed language like Java the idiomatic way would be an instance of a `SoccerScore` class.) This data is passed around between modules of your code or sent to external systems, yet the knowledge about what this list of integers stands for is not available anywhere. Maybe you described it in the project's documentation, which is likely outdated. Most probably it is implicitly assumed in your code (`var goals_scored = score[0] + score[1];`). If the semantics change (e.g. list contains also teams), your code breaks.
