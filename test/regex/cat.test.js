@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 import { catImpl as cat, altImpl as alt } from '../../lib/regex'
 import map from '../../lib/spec/map'
+import nilable from '../../lib/spec/nilable'
 import { conform, valid } from '../../lib/util'
 import { invalid } from '../../lib/symbols'
 import { define } from '../../lib/registry'
@@ -80,6 +81,21 @@ describe("cat", () => {
       })
     })
 
+    it("works with nilable parts", () => {
+      // what if the spec, but not the regex accepts nil value?
+      const can_be_nil = nilable(map({
+        quantity: p.number,
+        unit: p.string
+      }))
+      // expect(conform(can_be_nil)).to.deep.equal(undefined)
+      const nil_and_something = cat("something", p.string, "maybe nil", can_be_nil)
+      // console.log(explainData(nil_and_something, ["foo"]))
+      expect(conform(nil_and_something, ["foo"])).to.deep.equal({
+        something: "foo",
+        "maybe nil": null
+      })
+    })
+
     it("works in negative case (not matching preds)", () => {
       expect(conform(ingredient, ["5", "spoons"])).to.equal(invalid)
     })
@@ -132,7 +148,15 @@ describe("cat", () => {
       expect(problems).to.be.an("array").and.to.have.length(0)
     })
 
-    it("[too few values]", () => {
+    it("[too few values, but it's ok]", () => {
+      const regular = alt("str", p.string, "int", p.number)
+      const nilable_named_ingredient = cat("name", p.string, "ingredient", alt("data", regular, "none", p.nil))
+      const problems = explainData(nilable_named_ingredient, ["endless void"])
+
+      expect(problems).to.be.an("array").and.to.have.length(0)
+    })
+
+    it("[too few values, not ok]", () => {
       const problems = explainData(weak_ingredient, ["spoons"])
 
       expect(problems).to.be.an("array").and.to.have.length(1)
