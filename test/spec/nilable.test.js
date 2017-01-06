@@ -34,16 +34,16 @@ describe("nilable", () => {
   describe("conform", () => {
     it("works on predicates", () => {
       expect(nil_int.conform(null), "null").to.equal(null)
-      expect(nil_int.conform(undefined), "undefined").to.equal(undefined)
-      expect(nil_int.conform(), "undefined 2").to.equal(undefined)
+      expect(nil_int.conform(undefined), "undefined").to.equal(null)
+      expect(nil_int.conform(), "undefined 2").to.equal(null)
       expect(nil_int.conform(13), "int").to.equal(13)
       expect(nil_int.conform("13"), "string").to.equal(invalid)
     })
 
     it("works on specs", () => {
       expect(nil_friend.conform(null), "null").to.equal(null)
-      expect(nil_friend.conform(undefined), "undefined").to.equal(undefined)
-      expect(nil_friend.conform(), "undefined 2").to.equal(undefined)
+      expect(nil_friend.conform(undefined), "undefined").to.equal(null)
+      expect(nil_friend.conform(), "undefined 2").to.equal(null)
       expect(nil_friend.conform({
         name: "niko"
       }), "friend").to.deep.equal({
