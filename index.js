@@ -23,7 +23,23 @@ export function explainData(spec, value) {
   })
 }
 
+const problemStr = function (problem, value) {
+  return `${problem.via.join(" → ")}: ${problem.predicateName} failed for ${getIn(value, problem.path)} at [${problem.path.join(", ")}].`
+};
+
 export function explain(spec, value) {
   explainData(spec, value)
-    .forEach(problem => console.log(`${problem.via.join(" → ")}: ${problem.predicateName} failed for ${getIn(value, problem.path)} at [${problem.path.join(", ")}].`))
+    .forEach(problem => console.log(problemStr(problem, value)))
+}
+
+export function explainStr(spec, value) {
+  return explainData(spec, value)
+    .map(problem => problemStr(problem, value))
+    .join("\n")
+}
+
+export function assert(spec, value) {
+  if (!util.valid(spec, value)) {
+    throw new Error(explainStr(spec, value))
+  }
 }
