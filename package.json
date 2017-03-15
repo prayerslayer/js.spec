@@ -5,6 +5,7 @@
   "main": "dist/js.spec.js",
   "scripts": {
     "build": "webpack --config webpack.config.js -p",
+    "lint": "eslint index.js lib/**/*.js",
     "prepublish": "npm run build",
     "test": "mocha --recursive --compilers js:babel-register test",
     "test:watch": "mocha --recursive --reporter=min --watch --compilers js:babel-register test",
@@ -31,6 +32,7 @@
     "babel-register": "^6.18.0",
     "chai": "^3.5.0",
     "coveralls": "^2.11.14",
+    "eslint": "^3.17.1",
     "mocha": "^3.1.2",
     "pretty-format": "^18.0.0",
     "webpack": "2.1.0-beta.25"

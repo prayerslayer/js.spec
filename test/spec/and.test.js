@@ -3,8 +3,7 @@ import and from '../../lib/spec/and'
 import map from '../../lib/spec/map'
 import * as p from '../../lib/predicates'
 import { explainData } from '../../index'
-import { invalid, optional } from '../../lib/symbols'
-import { define, _clear } from '../../lib/registry'
+import { invalid } from '../../lib/symbols'
 
 const friend = map({
   name: p.string

@@ -3,7 +3,7 @@ import map from '../../lib/spec/map'
 import * as p from '../../lib/predicates'
 import { explainData } from '../../index'
 import { invalid, optional } from '../../lib/symbols'
-import { define, _clear } from '../../lib/registry'
+import { define } from '../../lib/registry'
 
 function generateConformTests(testData, expectFn) {
   testData.forEach(test => it(`[${test.message}]`, () => {
