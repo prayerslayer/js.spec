@@ -47,7 +47,6 @@ describe("tuple", () => {
     it("works with predicates", () => {
       const t = tuple(p.int, p.int)
       const path = []
-      const via = []
 
       expect(explainData(t, [0, 0]), "happy case").to.deep.equal([])
 

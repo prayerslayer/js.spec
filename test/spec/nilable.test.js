@@ -4,7 +4,6 @@ import map from '../../lib/spec/map'
 import * as p from '../../lib/predicates'
 import { invalid } from '../../lib/symbols'
 import { explainData } from '../../index'
-import { define, _clear } from '../../lib/registry'
 
 const friend = map({
   name: p.string

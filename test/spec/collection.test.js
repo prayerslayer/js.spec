@@ -4,7 +4,7 @@ import map from '../../lib/spec/map'
 import * as p from '../../lib/predicates'
 import { explainData } from '../../index'
 import { invalid, count, minCount, maxCount } from '../../lib/symbols'
-import { define, _clear } from '../../lib/registry'
+import { define } from '../../lib/registry'
 
 describe("collection", () => {
   describe("explain", () => {
