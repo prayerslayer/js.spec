@@ -38,7 +38,7 @@ If you want to include it into a web page directly via `script`, please use the 
 <script src="./js.spec.bundle.js" charset="utf-8"></script>
 <script type="text/javascript">
   const {spec, valid} = window['js.spec']
-  const foo = spec.map({
+  const foo = spec.map("foo", {
     name: spec.string
   })
   alert(valid(foo, {name: 'hugo'}))
