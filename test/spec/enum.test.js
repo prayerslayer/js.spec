@@ -6,7 +6,7 @@ import { explainData } from '../../index'
 describe("enum", () => {
   describe("conform", () => {
     it("works with numbers", () => {
-      const e = oneOf(1, 2, 3)
+      const e = oneOf("one", 1, 2, 3)
       expect(e.conform(1)).to.equal(1)
       expect(e.conform(2)).to.equal(2)
       expect(e.conform(3)).to.equal(3)
@@ -17,7 +17,7 @@ describe("enum", () => {
     it("works with symbols", () => {
       const s1 = Symbol()
       const s2 = Symbol()
-      const e = oneOf(s1, s2)
+      const e = oneOf("symbol", s1, s2)
 
       expect(e.conform(s1)).to.equal(s1)
       expect(e.conform(s2)).to.equal(s2)
@@ -27,12 +27,12 @@ describe("enum", () => {
 
   describe("explain", () => {
     it("outputs expected data", () => {
-      const e = oneOf(1, 2, 3)
+      const e = oneOf("one", 1, 2, 3)
       const problems = explainData(e, 4)
 
       expect(problems).to.be.an("array").and.have.length(1)
       expect(problems).to.have.deep.property("[0].via")
-        .that.deep.equals(["Enum(1, 2, 3)"])
+        .that.deep.equals(["one"])
       expect(problems).to.have.deep.property("[0].path")
         .that.deep.equals([])
       expect(problems).to.have.deep.property("[0].predicate")

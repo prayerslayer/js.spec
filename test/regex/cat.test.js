@@ -36,7 +36,7 @@ describe("cat", () => {
     it("works with specs", () => {
       const i = cat(
         "user",
-        map({
+        map("user", {
           name: p.string
         }),
         "password",

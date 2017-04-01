@@ -9,10 +9,10 @@ describe("collection", () => {
   describe("explain", () => {
 
     describe("works with specs", () => {
-      const friend = map({
+      const friend = map("friend", {
         name: p.string
       })
-      const spec = collection(friend, {
+      const spec = collection("1-3 friends", friend, {
         [minCount]: 1,
         [maxCount]: 3
       })
@@ -27,7 +27,7 @@ describe("collection", () => {
           .that.is.a("function")
         expect(problems).to.have.deep.property("[0].via")
           .that.is.an("array")
-          .and.deep.equals(["Collection(Map)"])
+          .and.deep.equals(["1-3 friends"])
         expect(problems).to.have.deep.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([])
@@ -43,7 +43,7 @@ describe("collection", () => {
           .that.is.a("function")
         expect(problems).to.have.deep.property("[0].via")
           .that.is.an("array")
-          .and.deep.equals(["Map"])
+          .and.deep.equals(["friend"])
         expect(problems).to.have.deep.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([0])
@@ -63,7 +63,7 @@ describe("collection", () => {
           .that.is.a("function")
         expect(problems).to.have.deep.property("[0].via")
           .that.is.an("array")
-          .and.deep.equals(["Map", "isString"])
+          .and.deep.equals(["friend", "isString"])
         expect(problems).to.have.deep.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([0, "name"])
@@ -79,7 +79,7 @@ describe("collection", () => {
           .that.is.a("function")
         expect(problems).to.have.deep.property("[0].via")
           .that.is.an("array")
-          .and.deep.equals(["Collection(Map)"])
+          .and.deep.equals(["1-3 friends"])
         expect(problems).to.have.deep.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([])
@@ -95,7 +95,7 @@ describe("collection", () => {
           .that.is.a("function")
         expect(problems).to.have.deep.property("[0].via")
           .that.is.an("array")
-          .and.deep.equals(["Collection(Map)"])
+          .and.deep.equals(["1-3 friends"])
         expect(problems).to.have.deep.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([])
@@ -105,7 +105,7 @@ describe("collection", () => {
     })
 
     describe("works with predicates", () => {
-      const spec = collection(p.int, {
+      const spec = collection("some ints", p.int, {
         [minCount]: 1,
         [maxCount]: 3
       })
@@ -120,7 +120,7 @@ describe("collection", () => {
           .that.is.a("function")
         expect(problems).to.have.deep.property("[0].via")
           .that.is.an("array")
-          .and.deep.equals(["Collection(isInteger)"])
+          .and.deep.equals(["some ints"])
         expect(problems).to.have.deep.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([])
@@ -152,7 +152,7 @@ describe("collection", () => {
           .that.is.a("function")
         expect(problems).to.have.deep.property("[0].via")
           .that.is.an("array")
-          .and.deep.equals(["Collection(isInteger)"])
+          .and.deep.equals(["some ints"])
         expect(problems).to.have.deep.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([])
@@ -168,7 +168,7 @@ describe("collection", () => {
           .that.is.a("function")
         expect(problems).to.have.deep.property("[0].via")
           .that.is.an("array")
-          .and.deep.equals(["Collection(isInteger)"])
+          .and.deep.equals(["some ints"])
         expect(problems).to.have.deep.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([])
@@ -178,7 +178,7 @@ describe("collection", () => {
 
   describe("conform", () => {
     it("works with optional params [count]", () => {
-      const spec = collection(p.int, {
+      const spec = collection("exactly 2 ints", p.int, {
         [count]: 2
       })
 
@@ -193,7 +193,7 @@ describe("collection", () => {
     })
 
     it("works with optional params [minCount]", () => {
-      const spec = collection(p.int, {
+      const spec = collection("min 2 ints", p.int, {
         [minCount]: 2
       })
 
@@ -208,7 +208,7 @@ describe("collection", () => {
     })
 
     it("works with optional params [maxCount]", () => {
-      const spec = collection(p.int, {
+      const spec = collection("max 2 ints", p.int, {
         [maxCount]: 2
       })
 
@@ -223,7 +223,7 @@ describe("collection", () => {
     })
 
     it("works on predicates", () => {
-      const spec = collection(p.int)
+      const spec = collection("ints", p.int)
       const value = [1, 2]
       expect(spec.conform(value), "array").to.deep.equal(value)
       const s = new Set(value)
@@ -234,10 +234,10 @@ describe("collection", () => {
     })
 
     it("works on specs", () => {
-      const friend = map({
+      const friend = map("friend", {
         name: p.string
       })
-      const spec = collection(friend)
+      const spec = collection("friends", friend)
       const value = [{
         name: 'holger'
       }, {
@@ -249,10 +249,10 @@ describe("collection", () => {
     })
 
     it("works on spec aliases", () => {
-      const friend = map({
+      const friend = map("friend", {
         name: p.string
       })
-      const spec = collection(friend)
+      const spec = collection("friends", friend)
       const value = [{
         name: 'holger'
       }, {

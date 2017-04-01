@@ -5,15 +5,15 @@ import * as p from '../../lib/predicates'
 import { explainData } from '../../index'
 import { invalid } from '../../lib/symbols'
 
-const friend = map({
+const friend = map("friend", {
   name: p.string
 })
-const positioned = map({
+const positioned = map("positioned", {
   lat: p.number,
   lon: p.number
 })
-const positioned_friend = and(positioned, friend)
-const big_even = and(p.int, p.even, x => x > 1000)
+const positioned_friend = and("positioned friend", positioned, friend)
+const big_even = and("big even", p.int, p.even, x => x > 1000)
 
 describe("and", () => {
   describe("explain", () => {
@@ -29,9 +29,9 @@ describe("and", () => {
           .and.have.length(1)
         expect(problems).to.have.deep.property("[0].via")
           .that.deep.equals([
-          "And(Map, Map)",
-          "Map",
-          "Keys(name)"
+          "positioned friend",
+          "friend",
+          "Keys(friend)"
         ])
         expect(problems).to.have.deep.property("[0].path")
           .that.deep.equals(["name"])
@@ -52,9 +52,9 @@ describe("and", () => {
           .and.have.length(1)
         expect(problems).to.have.deep.property("[0].via")
           .that.deep.equals([
-          "And(Map, Map)",
-          "Map",
-          "Keys(lat, lon)"
+          "positioned friend",
+          "positioned",
+          "Keys(positioned)"
         ])
         expect(problems).to.have.deep.property("[0].path")
           .that.deep.equals(["lon"])
@@ -75,9 +75,9 @@ describe("and", () => {
           .and.have.length(1)
         expect(problems).to.have.deep.property("[0].via")
           .that.deep.equals([
-          "And(Map, Map)",
-          "Map",
-          "Keys(lat, lon)"
+          "positioned friend",
+          "positioned",
+          "Keys(positioned)"
         ])
         expect(problems).to.have.deep.property("[0].path")
           .that.deep.equals(["lon"])
@@ -95,7 +95,7 @@ describe("and", () => {
           .and.have.length(1)
         expect(problems).to.have.deep.property("[0].via")
           .that.deep.equals([
-          "And(isInteger, even, [anonymous predicate])",
+          "big even",
           "isInteger"
         ])
         expect(problems).to.have.deep.property("[0].path")
@@ -112,8 +112,8 @@ describe("and", () => {
           .and.have.length(1)
         expect(problems).to.have.deep.property("[0].via")
           .that.deep.equals([
-          "And(isInteger, even, [anonymous predicate])",
-          "[anonymous predicate]"
+          "big even",
+          "[anonymous function]"
         ])
         expect(problems).to.have.deep.property("[0].path")
           .that.deep.equals([])
@@ -129,7 +129,7 @@ describe("and", () => {
           .and.have.length(1)
         expect(problems).to.have.deep.property("[0].via")
           .that.deep.equals([
-          "And(isInteger, even, [anonymous predicate])",
+          "big even",
           "even"
         ])
         expect(problems).to.have.deep.property("[0].path")

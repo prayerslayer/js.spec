@@ -5,13 +5,13 @@ import * as p from '../../lib/predicates'
 import { invalid } from '../../lib/symbols'
 import { explainData } from '../../index'
 
-const friend = map({
+const friend = map("friend", {
   name: p.string
 })
-const nil_friend = nilable(friend)
-const nil_int = nilable(p.int)
+const nil_friend = nilable("maybe friend", friend)
+const nil_int = nilable("maybe int", p.int)
 
-describe("tuple", () => {
+describe("nilable", () => {
   describe("explain", () => {
     describe("works on specs", () => {
       it("[not null and not a friend]", () => {
@@ -21,7 +21,7 @@ describe("tuple", () => {
         const problems = explainData(nil_friend, f)
         expect(problems).to.be.an("array").and.have.length(1)
         expect(problems).to.have.deep.property("[0].via")
-          .that.deep.equals(["Nilable(Map)", "Map", "isString"])
+          .that.deep.equals(["maybe friend", "friend", "isString"])
         expect(problems).to.have.deep.property("[0].path")
           .that.deep.equals(["name"])
         expect(problems).to.have.deep.property("[0].predicate")

@@ -1,15 +1,15 @@
 import { spec, valid, explain, conform } from './index'
 
-const point = spec.map({
+const point = spec.map("point", {
   x: spec.int,
   y: spec.int
 })
-const line = spec.map({
+const line = spec.map("line", {
   p1: point,
   p2: point
 })
-const point_or_line = spec.or({
-  point,
+const point_or_line = spec.or("point or line", {
+  point: point,
   line
 })
 
@@ -21,9 +21,9 @@ valid(point_or_line, p)
 
 // what is wrong?
 explain(point_or_line, p)
-// Or(point, line) → point → Map → Keys(x, y): hasKey failed for undefined at [y].
-// Or(point, line) → line → Map → Keys(p1, p2): hasKey failed for undefined at [p1].
-// Or(point, line) → line → Map → Keys(p1, p2): hasKey failed for undefined at [p2].
+// point or line → point → point → Keys(point): hasKey failed for undefined at [y].
+// point or line → line → line → Keys(line): hasKey failed for undefined at [p1].
+// point or line → line → line → Keys(line): hasKey failed for undefined at [p2].
 
 // let's try again
 const p2 = {
@@ -43,6 +43,6 @@ const line2 = spec.cat("source", point, "target", point)
 conform(line2, [p2, p2])
 // => {source: {x: 0, y: 0}, target: {x: 0, y: 0}}
 explain(line2, [p2, p])
-// cat · → target → Map → Keys(x, y): hasKey failed for undefined at [1, y]
+// cat · → target → point → Keys(point): hasKey failed for undefined at [1, y].
 explain(line2, [p2])
-// cat · → target → Map: isObject failed for undefined at [1].
+// cat ·: hasLength failed for undefined at [].
