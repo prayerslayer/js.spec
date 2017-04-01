@@ -3,7 +3,6 @@ import map from '../../lib/spec/map'
 import * as p from '../../lib/predicates'
 import { explainData } from '../../index'
 import { invalid, optional } from '../../lib/symbols'
-import { define } from '../../lib/registry'
 
 function generateConformTests(testData, expectFn) {
   testData.forEach(test => it(`[${test.message}]`, () => {
@@ -190,10 +189,9 @@ describe("map", () => {
     })
 
     describe("works on spec aliases", () => {
-      const school = Symbol("School")
-      define(school, map({
+      const school = map({
         district: p.string
-      }))
+      }) 
       const friend = map({
         name: p.string,
         school

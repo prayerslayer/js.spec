@@ -12,7 +12,6 @@ const specsAndPreds = Object.assign({
 }, specs, predicates)
 
 export { specsAndPreds as spec, symbols as symbol }
-export * from './lib/registry'
 export { valid, conform } from './lib/util'
 
 export function explainData(spec, value) {

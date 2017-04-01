@@ -3,7 +3,6 @@ import map from '../../lib/spec/map'
 import { conform, valid } from '../../lib/util'
 import { invalid } from '../../lib/symbols'
 import { expect } from 'chai'
-import { define } from '../../lib/registry'
 import { explainData } from '../../index'
 import * as p from '../../lib/predicates'
 
@@ -48,23 +47,6 @@ describe("alt", () => {
       })
     })
 
-    it("works with spec refs", () => {
-      const user = Symbol()
-      define(user, map({
-        name: p.string
-      }))
-      const userOrPwd = alt("user", user, "password", p.string)
-      expect(conform(userOrPwd, [{
-        name: "john"
-      }])).to.deep.equal({
-        user: {
-          name: "john"
-        }
-      })
-      expect(conform(userOrPwd, "secret")).to.deep.equal({
-        password: "secret"
-      })
-    })
 
     it("works in happy case", () => {
       expect(conform(ingredient_part, 5)).to.deep.equal({
@@ -113,8 +95,7 @@ describe("alt", () => {
 
   describe("explain", () => {
     it("[happy case]", () => {
-      const id = Symbol()
-      define(id, ingredient_variation)
+      const id = ingredient_variation
       const problems = explainData(id, ["spoons", 5])
       expect(problems).to.be.an("array").and.to.have.length(0)
     })

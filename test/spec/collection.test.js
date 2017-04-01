@@ -4,7 +4,6 @@ import map from '../../lib/spec/map'
 import * as p from '../../lib/predicates'
 import { explainData } from '../../index'
 import { invalid, count, minCount, maxCount } from '../../lib/symbols'
-import { define } from '../../lib/registry'
 
 describe("collection", () => {
   describe("explain", () => {
@@ -250,10 +249,9 @@ describe("collection", () => {
     })
 
     it("works on spec aliases", () => {
-      const friend = Symbol()
-      define(friend, map({
+      const friend = map({
         name: p.string
-      }))
+      })
       const spec = collection(friend)
       const value = [{
         name: 'holger'

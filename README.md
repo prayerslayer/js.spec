@@ -59,7 +59,7 @@ The 0.0.x published versions should be seen as developer previews. Code may or m
   * ✅ Tuple
   * ✅ Nilable
   * ✅ Enum
-* ✅ Spec Registry
+* <strike>✅ Spec Registry</strike> Removed after discussion in #21
 * :construction: Spec Regexes (`cat`, `alt`, `*`, `?`, `+`)
 * 😰 Generator Functions
 * 😫 Function Specs (Not even sure if it's possible the way it works in `clojure.spec`)
