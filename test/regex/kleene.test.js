@@ -1,0 +1,89 @@
+import { expect } from 'chai'
+import {
+  kleeneImpl as kleene,
+  catImpl as cat,
+  altImpl as alt
+} from '../../lib/regex'
+import map from '../../lib/spec/map'
+import nilable from '../../lib/spec/nilable'
+import { conform, valid } from '../../lib/util'
+import { invalid } from '../../lib/symbols'
+import { define } from '../../lib/registry'
+import { explainData, explain, spec } from '../../index'
+import * as p from '../../lib/predicates'
+
+describe.only('kleene', () => {
+  /*
+        star nil [] nil
+        star [] [] nil
+        star [:k] [:k] nil
+        star [:k1 :k2] [:k1 :k2] nil
+        star [:k1 :k2 "x"] ::s/invalid '[{:pred keyword?, :val "x" :via []}]
+        star ["a"] ::s/invalid '[{:pred keyword?, :val "a" :via []}]
+   */
+
+  it('no value', () => {
+    expect(conform(kleene(p.int))).to.eql([]);
+    expect(conform(kleene(p.int), null)).to.eql([]);
+    expect(conform(kleene(p.int), undefined)).to.eql([]);
+  });
+
+  it('empty array', () => {
+    expect(conform(kleene(p.int), [])).to.eql([]);
+  });
+
+  it('single correct value', () => {
+    expect(conform(kleene(p.int), [42])).to.eql([42]);
+  });
+
+  it('with specs', () => {
+    expect(conform(kleene(spec.and(p.int, p.even)), [2])).to.eql([2]);
+    expect(conform(kleene(spec.and(p.int, p.even)), [3])).to.eql(invalid);
+
+    expect(conform(kleene(spec.or({
+      'id': p.int,
+      'name': p.string
+    })), [2])).to.eql([['id', 2]]);
+    expect(conform(kleene(spec.or({
+      'id': p.int,
+      'name': p.string
+    })), [2, 'Barry'])).to.eql([['id', 2],['name', 'Barry']]);
+  });
+
+  it.only('with regexes', () => {
+    /* console.log(conform(alt('a', p.int, 'b', cat('c', p.string, 'd', p.int)), ['hi', 1])); */
+    /* expect( */
+      console.log(conform(kleene(cat(
+      'word1', p.string,
+      'id', p.int,
+      'word2', p.string
+    )), ['hi', 3, 'world']));
+  /* ).to.eql([{ */
+      /* 'word1': 'hi', */
+      /* 'id': 3, */
+      /* 'word2': 'world' */
+    /* }]); */
+  });
+
+  it('multiple correct values', () => {
+    expect(conform(kleene(p.int), [42, 21])).to.eql([42, 21]);
+  });
+
+  it('multiple incorrect values', () => {
+    expect(conform(kleene(p.int), [42, 21, 'x'])).to.eql(invalid);
+    const a = explainData(kleene(p.int), [42, 21, 'x'])
+    expect(a[0].predicate).to.eql(p.int);
+    expect(a[0].path).to.eql([2]);
+    expect(a[0].via).to.eql([]);
+    expect(a[0].value).to.eql('x');
+  });
+
+  it('single incorrect value', () => {
+    expect(conform(kleene(p.int), ['x'])).to.eql(invalid);
+    const a = explainData(kleene(p.int), ['x'])
+    expect(a[0].predicate).to.eql(p.int);
+    expect(a[0].path).to.eql([0]);
+    expect(a[0].via).to.eql([]);
+    expect(a[0].value).to.eql('x');
+  });
+});
