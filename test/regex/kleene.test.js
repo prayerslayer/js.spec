@@ -12,20 +12,10 @@ import { define } from '../../lib/registry'
 import { explainData, explain, spec } from '../../index'
 import * as p from '../../lib/predicates'
 
-describe.only('kleene', () => {
-  /*
-        star nil [] nil
-        star [] [] nil
-        star [:k] [:k] nil
-        star [:k1 :k2] [:k1 :k2] nil
-        star [:k1 :k2 "x"] ::s/invalid '[{:pred keyword?, :val "x" :via []}]
-        star ["a"] ::s/invalid '[{:pred keyword?, :val "a" :via []}]
-   */
-
+describe('kleene', () => {
   it('no value', () => {
     expect(conform(kleene(p.int))).to.eql([]);
     expect(conform(kleene(p.int), null)).to.eql([]);
-    expect(conform(kleene(p.int), undefined)).to.eql([]);
   });
 
   it('empty array', () => {
@@ -50,19 +40,18 @@ describe.only('kleene', () => {
     })), [2, 'Barry'])).to.eql([['id', 2],['name', 'Barry']]);
   });
 
-  it.only('with regexes', () => {
-    /* console.log(conform(alt('a', p.int, 'b', cat('c', p.string, 'd', p.int)), ['hi', 1])); */
-    /* expect( */
-      console.log(conform(kleene(cat(
-      'word1', p.string,
-      'id', p.int,
-      'word2', p.string
-    )), ['hi', 3, 'world']));
-  /* ).to.eql([{ */
-      /* 'word1': 'hi', */
-      /* 'id': 3, */
-      /* 'word2': 'world' */
-    /* }]); */
+  it('with regexes', () => {
+    expect(
+      conform(kleene(cat(
+        'word1', p.string,
+        'id', p.int,
+        'word2', p.string
+      )), ['hi', 3, 'world'])
+    ).to.eql([{
+      'word1': 'hi',
+      'id': 3,
+      'word2': 'world'
+    }]);
   });
 
   it('multiple correct values', () => {
