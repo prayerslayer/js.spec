@@ -90,6 +90,10 @@ describe("cat", () => {
       // expect(conform(can_be_nil)).to.deep.equal(undefined)
       const nil_and_something = cat("something", p.string, "maybe nil", can_be_nil)
       // console.log(explainData(nil_and_something, ["foo"]))
+
+      // TODO this should be an error according to clojure.spec
+      // ['foo' null] => correct!
+      // ['foo']      => Insufficient input
       expect(conform(nil_and_something, ["foo"])).to.deep.equal({
         something: "foo",
         "maybe nil": null

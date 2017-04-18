@@ -54,6 +54,10 @@ describe('kleene', () => {
     }]);
   });
 
+  it('with nilable', () => {
+    expect(conform(kleene(nilable(p.int)), [null])).to.eql([null]);
+  });
+
   it('multiple correct values', () => {
     expect(conform(kleene(p.int), [42, 21])).to.eql([42, 21]);
   });
