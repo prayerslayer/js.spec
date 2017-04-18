@@ -2,7 +2,8 @@ import { expect } from 'chai'
 import {
   kleeneImpl as kleene,
   catImpl as cat,
-  altImpl as alt
+  altImpl as alt,
+  maybeImpl as maybe
 } from '../../lib/regex'
 import map from '../../lib/spec/map'
 import nilable from '../../lib/spec/nilable'
@@ -16,6 +17,7 @@ describe('kleene', () => {
   it('no value', () => {
     expect(conform(kleene(p.int))).to.eql([]);
     expect(conform(kleene(p.int), null)).to.eql([]);
+    expect(conform(kleene(p.int), [null])).to.eql(invalid);
   });
 
   it('empty array', () => {
@@ -56,6 +58,7 @@ describe('kleene', () => {
 
   it('with nilable', () => {
     expect(conform(kleene(nilable(p.int)), [null])).to.eql([null]);
+    expect(conform(kleene(maybe('i', p.int)), [])).to.eql([]);
   });
 
   it('multiple correct values', () => {
