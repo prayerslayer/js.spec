@@ -105,6 +105,7 @@ describe("cat", () => {
     })
 
     it("works with too many items provided", () => {
+      // TODO this also diverges from clojure.spec
       expect(conform(ingredient, [5, "spoons", "tops"])).to.deep.equal({
         quantity: 5,
         unit: "spoons"

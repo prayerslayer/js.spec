@@ -84,6 +84,8 @@ describe("alt", () => {
     })
 
     it("works with too many items provided", () => {
+      // TODO this diverges from clojure.spec
+      // @see https://github.com/clojure/clojure/blob/master/test/clojure/test_clojure/spec.clj#L95
       expect(conform(ingredient_part, [5, "spoons", "tops"])).to.deep.equal({
         quantity: 5
       })
@@ -99,14 +101,14 @@ describe("alt", () => {
       expect(conform(nullable_alt, null)).to.deep.equal({
         "no value": null
       })
+
+      // TODO I don't think we want null and undefined to have the same meaning
       expect(conform(nullable_alt)).to.deep.equal({
         "no value": null
       })
       expect(conform(nullable_alt, 5)).to.deep.equal({
         "value": 5
       })
-
-
     })
 
     it("works in happy nested case", () => {
@@ -140,6 +142,7 @@ describe("alt", () => {
     })
 
     it("[too many values]", () => {
+      // TODO again this diverges from clojure.spec
       const problems = explainData(ingredient_variation, ["spoons", 5, 5])
       expect(problems).to.be.an("array").and.to.have.length(0)
     })

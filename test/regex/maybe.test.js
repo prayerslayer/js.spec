@@ -12,6 +12,7 @@ const maybe_ingredient = maybe("ingredient", cat("quantity", p.number, "unit", p
 describe('maybe', () => {
   describe('conform', () => {
     it('works in happy case', () => {
+      // TODO diverges from clojure.spec
       expect(conform(maybe_ingredient), "no value").to.deep.equal({
         ingredient: null
       })
@@ -28,6 +29,7 @@ describe('maybe', () => {
 
     it('works in nested case', () => {
       const ingredient = cat("quantity", maybe("value", p.number), "unit", maybe("value", p.string))
+      // TODO again mixing undefined and null values here
       expect(conform(ingredient, [])).to.deep.equal({
         quantity: {
           value: null
