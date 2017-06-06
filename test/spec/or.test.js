@@ -65,7 +65,7 @@ describe("or", () => {
         expect(problems).to.have.deep
           .property("[1].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.property("[1].value").that.equals(err);
+        expect(problems).to.have.deep.property("[1].value").that.equals(err.name);
       });
     });
   });

@@ -27,7 +27,7 @@ describe("nilable", () => {
         expect(problems).to.have.deep.property("[0].predicate")
           .that.is.a("function")
         expect(problems).to.have.deep.property("[0].value")
-          .that.deep.equals(f)
+          .that.deep.equals(f.name)
       })
     })
   })

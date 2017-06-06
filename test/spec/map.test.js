@@ -48,7 +48,7 @@ describe("map", () => {
           .and.deep.equals(["friend", "school", "Keys(school)"]);
         expect(missingKey).to.have.deep
           .property("[0].value")
-          .that.deep.equals(value);
+          .that.deep.equals(value.school);
       });
 
       it("[invalid key]", () => {
@@ -68,10 +68,10 @@ describe("map", () => {
           .that.deep.equals(["school", "district"]);
         expect(invalidKey).to.have.deep
           .property("[0].via")
-          .that.deep.equals(["friend", "school", "Keys(school)"]);
+          .that.deep.equals(["friend", "school", "isString"]);
         expect(invalidKey).to.have.deep
           .property("[0].value")
-          .that.deep.equals(value);
+          .that.deep.equals(9);
       });
     });
 
@@ -100,7 +100,7 @@ describe("map", () => {
           .that.is.an("array")
           .and.deep.equals(["friend", "Keys(friend)"]);
         expect(missingKey).to.have.deep.property("[0].value").that.deep.equals({
-          district: "xhain"
+          district: 'xhain'
         });
       });
 
@@ -118,9 +118,7 @@ describe("map", () => {
         expect(invalidKey).to.have.deep
           .property("[0].via")
           .that.deep.equals(["friend", "isString"]);
-        expect(invalidKey).to.have.deep.property("[0].value").that.deep.equals({
-          name: 3000
-        });
+        expect(invalidKey).to.have.deep.property("[0].value").that.deep.equals(3000);
       });
     });
   });

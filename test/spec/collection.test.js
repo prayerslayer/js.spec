@@ -56,9 +56,7 @@ describe("collection", () => {
         expect(problems).to.be.an("array")
           .and.have.length(1)
         expect(problems).to.have.deep.property("[0].value")
-          .that.deep.equals({
-          name: 3000
-        })
+          .that.deep.equals(3000)
         expect(problems).to.have.deep.property("[0].predicate")
           .that.is.a("function")
         expect(problems).to.have.deep.property("[0].via")
