@@ -4,7 +4,7 @@
   "description": "clojure.spec for Javascript",
   "main": "dist/js.spec.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js -p",
+    "build": "webpack --config webpack.config.js",
     "lint": "eslint index.js lib/**/*.js",
     "prepublish": "npm run build",
     "test": "mocha --recursive --compilers js:babel-register test",
@@ -37,6 +37,8 @@
     "mocha": "^3.1.2",
     "nodemon": "^1.11.0",
     "pretty-format": "^18.0.0",
+    "uglify-js": "git://github.com/mishoo/UglifyJS2#harmony-v2.8.22",
+    "uglifyjs-webpack-plugin": "0.4.6",
     "webpack": "2.1.0-beta.25"
   },
   "dependencies": {

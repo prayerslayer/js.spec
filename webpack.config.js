@@ -1,7 +1,8 @@
-var fs = require('fs')
-var path = require('path')
-var node_modules = fs.readdirSync('node_modules')
+const fs = require('fs')
+const path = require('path')
+const node_modules = fs.readdirSync('node_modules')
 
+const uglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = [{
   // node library
@@ -29,7 +30,9 @@ module.exports = [{
       }
     }]
   },
-  plugins: []
+  plugins: [
+    new uglifyJSPlugin()
+  ]
 }, {
   // <script>
   entry: './index.js',
@@ -55,5 +58,7 @@ module.exports = [{
       }
     }]
   },
-  plugins: []
+  plugins: [
+    new uglifyJSPlugin()
+  ]
 }]
