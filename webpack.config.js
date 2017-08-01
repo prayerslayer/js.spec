@@ -3,6 +3,23 @@ const path = require('path')
 const node_modules = fs.readdirSync('node_modules')
 
 const uglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const uglifyJSOptions = {
+  mangle: {
+    reserved: [
+      "isArray",
+      "isNumber",
+      "isFunction",
+      "isObject",
+      "isSet",
+      "isBoolean",
+      "isDate",
+      "isInteger",
+      "isString",
+      "isSymbol",
+      "isNil"
+    ]
+  }
+};
 
 module.exports = [{
   // node library
@@ -31,7 +48,9 @@ module.exports = [{
     }]
   },
   plugins: [
-    new uglifyJSPlugin()
+    new uglifyJSPlugin({
+      uglifyOptions: uglifyJSOptions
+    })
   ]
 }, {
   // <script>
@@ -59,6 +78,8 @@ module.exports = [{
     }]
   },
   plugins: [
-    new uglifyJSPlugin()
+    new uglifyJSPlugin({
+      uglifyOptions: uglifyJSOptions
+    })
   ]
 }]
