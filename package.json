@@ -1,6 +1,6 @@
 {
   "name": "js.spec",
-  "version": "1.0.0-5",
+  "version": "1.0.0-6",
   "description": "clojure.spec for Javascript",
   "main": "dist/js.spec.js",
   "scripts": {
