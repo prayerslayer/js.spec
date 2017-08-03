@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "lint": "eslint index.js lib/**/*.js",
-    "prepublish": "npm run build",
+    "preinstall": "npm run build",
     "test": "mocha --recursive --compilers js:babel-register test",
     "test:watch": "mocha --recursive --reporter=min --watch --compilers js:babel-register test",
     "coverage": "babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha -- test --recursive",
