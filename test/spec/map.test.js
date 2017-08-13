@@ -121,7 +121,35 @@ describe("map", () => {
         expect(invalidKey).to.have.deep.property("[0].value").that.deep.equals(3000);
       });
     });
+
+    describe("works on optional-only maps", () => {
+      const caller = map("caller", {
+        [optional]: {
+          phone: p.number
+        }
+      });
+
+      it("[invalid key]", () => {
+        const invalidKey = explainData(caller, {
+          phone: 'stone'
+        });
+        expect(invalidKey).to.be.an("array").and.have.length(1);
+        expect(invalidKey).to.have.deep
+            .property("[0].predicate")
+            .that.is.a("function");
+        expect(invalidKey).to.have.deep
+            .property("[0].path")
+            .that.is.an("array")
+            .and.deep.equals(["phone"]);
+        expect(invalidKey).to.have.deep
+            .property("[0].via")
+            .that.is.an("array")
+            .and.deep.equals(["caller", "isNumber"]);
+        expect(invalidKey).to.have.deep.property("[0].value").that.equals('stone');
+      });
+    });
   });
+
 
   describe("conform", () => {
     describe("works on nested maps", () => {
@@ -328,6 +356,45 @@ describe("map", () => {
       });
 
       generateConformTests(TEST_DATA, test => spec.conform(test.value));
+    });
+
+    describe("works on optional-only maps", () => {
+      const caller = map("caller", {
+        [optional]: {
+          phone: p.number
+        }
+      });
+
+      const TEST_DATA = [
+        {
+          value: {
+            phone: 18005551212
+          },
+          message: "happy case",
+          expectedValid: true
+        },
+        {
+          value: {
+            phone: "seashore"
+          },
+          message: "invalid key",
+          expectedValid: false
+        },
+        {
+          value: {
+            tollFree: true
+          },
+          message: "additional keys",
+          expectedValid: true
+        },
+        {
+          value: {},
+          message: "empty object",
+          expectedValid: true
+        }
+      ];
+
+      generateConformTests(TEST_DATA, test => caller.conform(test.value));
     });
   });
 });
