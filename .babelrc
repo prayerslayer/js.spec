@@ -3,6 +3,7 @@
     "es2015"
   ],
   "plugins": [
-    "transform-es2015-spread"
+    "transform-es2015-spread",
+    "transform-object-entries"
   ]
 }
