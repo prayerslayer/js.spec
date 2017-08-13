@@ -1,11 +1,12 @@
 const fs = require('fs')
 const path = require('path')
 const node_modules = fs.readdirSync('node_modules')
-
 const uglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
 const uglifyJSOptions = {
   mangle: {
     reserved: [
+      // TODO generate
       "isArray",
       "isNumber",
       "isFunction",

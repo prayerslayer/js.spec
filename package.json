@@ -34,13 +34,13 @@
     "babel-register": "^6.18.0",
     "chai": "^3.5.0",
     "coveralls": "^2.11.14",
-    "eslint": "^3.17.1",
+    "eslint": "^4.4.1",
     "mocha": "^3.1.2",
     "nodemon": "^1.11.0",
     "pretty-format": "^18.0.0",
-    "uglify-js": "3",
+    "uglify-js": "^3.0.27",
     "uglifyjs-webpack-plugin": "1.0.0-beta.2",
-    "webpack": "2.1.0-beta.25"
+    "webpack": "^3.5.4"
   },
   "dependencies": {
     "lodash.chunk": "^4.2.0",
