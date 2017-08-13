@@ -384,7 +384,12 @@ describe("map", () => {
           value: {
             tollFree: true
           },
-          message: "addtional keys",
+          message: "additional keys",
+          expectedValid: true
+        },
+        {
+          value: {},
+          message: "empty object",
           expectedValid: true
         }
       ];
