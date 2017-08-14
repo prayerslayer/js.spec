@@ -9,5 +9,6 @@ cache:
 install:
   - npm install
 script:
+  - npm run lint
   - npm run coveralls
   - npm run build

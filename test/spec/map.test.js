@@ -14,7 +14,8 @@ function generateConformTests(testData, expectFn) {
         expect(result).to.be.a("symbol");
         expect(result, test.message).to.equal(invalid);
       }
-    }));
+    })
+  );
 }
 
 describe("map", () => {
@@ -100,7 +101,7 @@ describe("map", () => {
           .that.is.an("array")
           .and.deep.equals(["friend", "Keys(friend)"]);
         expect(missingKey).to.have.deep.property("[0].value").that.deep.equals({
-          district: 'xhain'
+          district: "xhain"
         });
       });
 
@@ -118,7 +119,9 @@ describe("map", () => {
         expect(invalidKey).to.have.deep
           .property("[0].via")
           .that.deep.equals(["friend", "isString"]);
-        expect(invalidKey).to.have.deep.property("[0].value").that.deep.equals(3000);
+        expect(invalidKey).to.have.deep
+          .property("[0].value")
+          .that.deep.equals(3000);
       });
     });
 
@@ -131,25 +134,26 @@ describe("map", () => {
 
       it("[invalid key]", () => {
         const invalidKey = explainData(caller, {
-          phone: 'stone'
+          phone: "stone"
         });
         expect(invalidKey).to.be.an("array").and.have.length(1);
         expect(invalidKey).to.have.deep
-            .property("[0].predicate")
-            .that.is.a("function");
+          .property("[0].predicate")
+          .that.is.a("function");
         expect(invalidKey).to.have.deep
-            .property("[0].path")
-            .that.is.an("array")
-            .and.deep.equals(["phone"]);
+          .property("[0].path")
+          .that.is.an("array")
+          .and.deep.equals(["phone"]);
         expect(invalidKey).to.have.deep
-            .property("[0].via")
-            .that.is.an("array")
-            .and.deep.equals(["caller", "isNumber"]);
-        expect(invalidKey).to.have.deep.property("[0].value").that.equals('stone');
+          .property("[0].via")
+          .that.is.an("array")
+          .and.deep.equals(["caller", "isNumber"]);
+        expect(invalidKey).to.have.deep
+          .property("[0].value")
+          .that.equals("stone");
       });
     });
   });
-
 
   describe("conform", () => {
     describe("works on nested maps", () => {
