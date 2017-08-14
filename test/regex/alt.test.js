@@ -84,23 +84,21 @@ describe("alt", () => {
 
     it("works with null/undefined", () => {
       // expect not nullable spec to be invalid for nil
-      expect(conform(ingredient_part, [])).to.deep.equal(invalid)
-      expect(conform(ingredient_part)).to.deep.equal(invalid)
+      expect(conform(ingredient_part, [])).to.deep.equal(invalid);
+      expect(conform(ingredient_part)).to.deep.equal(invalid);
 
       // expect nullable spec to be valid for nil
-      const nullable_alt = alt("value", p.number, "no value", p.nil)
+      const nullable_alt = alt("value", p.number, "no value", p.nil);
       expect(conform(nullable_alt, null)).to.deep.equal({
         "no value": null
-      })
+      });
       expect(conform(nullable_alt)).to.deep.equal({
         "no value": null
-      })
+      });
       expect(conform(nullable_alt, 5)).to.deep.equal({
-        "value": 5
-      })
-
-
-    })
+        value: 5
+      });
+    });
 
     it("works in happy nested case", () => {
       expect(

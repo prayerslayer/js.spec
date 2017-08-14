@@ -4,6 +4,7 @@
   ],
   "plugins": [
     "transform-es2015-spread",
-    "transform-object-entries"
+    "transform-object-entries",
+    "transform-object-rest-spread"
   ]
 }
