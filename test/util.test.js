@@ -15,11 +15,13 @@ describe("util", () => {
     });
     it("prints with objects", () => {
       expect(() =>
-        undefinedPredicateWarning("Array", { foo: undefined })).to.throw();
+        undefinedPredicateWarning("Array", { foo: undefined })
+      ).to.throw();
     });
     it("prints with single nilable values", () => {
       expect(() =>
-        undefinedPredicateWarning("Undefined", undefined)).to.throw();
+        undefinedPredicateWarning("Undefined", undefined)
+      ).to.throw();
       expect(() => undefinedPredicateWarning("Null", null)).to.throw();
     });
     it("is silent with other types", () => {
