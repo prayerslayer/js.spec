@@ -131,33 +131,33 @@ describe("alt", () => {
       //
       expect(problems).to.be.an("array").and.to.have.length(2);
 
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].path")
         .that.is.an("array")
         .and.deep.equals([0]);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].via")
         .that.is.an("array")
         .and.deep.equals(["alt |", "regular", "cat ·"]);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].value")
         .that.deep.equals(["spoons"]);
 
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[1].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[1].path")
         .that.is.an("array")
         .and.deep.equals([1]);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[1].via")
         .that.is.an("array")
         .and.deep.equals(["alt |", "reversed", "cat ·"]);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[1].value")
         .that.deep.equals(["spoons"]);
     });
@@ -170,44 +170,44 @@ describe("alt", () => {
 
       expect(problems).to.be.an("array").and.to.have.length(3);
 
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].path")
         .that.is.an("array")
         .and.deep.equals([0, 0]);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].via")
         .that.is.an("array")
         .and.deep.equals(["alt |", "regular", "cat ·", "quantity", "isNumber"]);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].value")
         .that.deep.equals("spoons");
 
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[1].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[1].path")
         .that.is.an("array")
         .and.deep.equals([0, 1]);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[1].via")
         .that.is.an("array")
         .and.deep.equals(["alt |", "regular", "cat ·", "unit", "isString"]);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[1].value")
         .that.deep.equals(false);
 
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[2].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[2].path")
         .that.is.an("array")
         .and.deep.equals([1, 1]);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[2].via")
         .that.is.an("array")
         .and.deep.equals([
@@ -217,7 +217,7 @@ describe("alt", () => {
           "quantity",
           "isNumber"
         ]);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[2].value")
         .that.deep.equals(false);
     });

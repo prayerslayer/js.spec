@@ -34,7 +34,7 @@ describe("or", () => {
         expect(problems).to.be.an("array").and.have.length(2);
 
         // problem with position spec
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].via")
           .that.deep.equals([
             "positioned or friend",
@@ -42,16 +42,18 @@ describe("or", () => {
             "positioned",
             "Keys(positioned)"
           ]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].path")
           .that.deep.equals(["lon"]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.property("[0].value").that.equals(err);
+        expect(problems).to.have.deep.nested
+          .property("[0].value")
+          .that.equals(err);
 
         // problem with friend spec
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[1].via")
           .that.deep.equals([
             "positioned or friend",
@@ -59,13 +61,13 @@ describe("or", () => {
             "named",
             "isString"
           ]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[1].path")
           .that.deep.equals(["name"]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[1].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[1].value")
           .that.equals(err.name);
       });

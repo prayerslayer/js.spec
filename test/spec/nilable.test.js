@@ -20,16 +20,16 @@ describe("nilable", () => {
         };
         const problems = explainData(nil_friend, f);
         expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].via")
           .that.deep.equals(["maybe friend", "friend", "isString"]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].path")
           .that.deep.equals(["name"]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].value")
           .that.deep.equals(f.name);
       });
