@@ -120,18 +120,18 @@ describe("cat", () => {
       const problems = explainData(weak_ingredient, ["spoons"]);
 
       expect(problems).to.be.an("array").and.to.have.length(1);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].path")
         .that.is.an("array")
         .and.deep.equals([]);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].via")
         .that.is.an("array")
         .and.deep.equals(["cat ·"]);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].value")
         .that.deep.equals(["spoons"]);
     });
@@ -140,18 +140,18 @@ describe("cat", () => {
       const problems = explainData(weak_ingredient, ["spoons", false]);
 
       expect(problems).to.be.an("array").and.to.have.length(1);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].path")
         .that.is.an("array")
         .and.deep.equals([1]);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].via")
         .that.is.an("array")
         .and.deep.equals(["cat ·", "unit"]);
-      expect(problems).to.have.deep
+      expect(problems).to.have.deep.nested
         .property("[0].value")
         .that.deep.equals(false);
     });

@@ -26,16 +26,18 @@ describe("and", () => {
         const problems = explainData(positioned_friend, value);
 
         expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].via")
           .that.deep.equals(["positioned friend", "friend", "Keys(friend)"]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].path")
           .that.deep.equals(["name"]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.property("[0].value").that.equals(value);
+        expect(problems).to.have.deep.nested
+          .property("[0].value")
+          .that.equals(value);
       });
 
       it("[not positioned]", () => {
@@ -46,20 +48,22 @@ describe("and", () => {
         const problems = explainData(positioned_friend, value);
 
         expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].via")
           .that.deep.equals([
             "positioned friend",
             "positioned",
             "Keys(positioned)"
           ]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].path")
           .that.deep.equals(["lon"]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.property("[0].value").that.equals(value);
+        expect(problems).to.have.deep.nested
+          .property("[0].value")
+          .that.equals(value);
       });
 
       it("[neither]", () => {
@@ -70,20 +74,22 @@ describe("and", () => {
         const problems = explainData(positioned_friend, value);
 
         expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].via")
           .that.deep.equals([
             "positioned friend",
             "positioned",
             "Keys(positioned)"
           ]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].path")
           .that.deep.equals(["lon"]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.property("[0].value").that.equals(value);
+        expect(problems).to.have.deep.nested
+          .property("[0].value")
+          .that.equals(value);
       });
     });
 
@@ -91,40 +97,52 @@ describe("and", () => {
       it("[not an int]", () => {
         const problems = explainData(big_even, "1002");
         expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].via")
           .that.deep.equals(["big even", "isInteger"]);
-        expect(problems).to.have.deep.property("[0].path").that.deep.equals([]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
+          .property("[0].path")
+          .that.deep.equals([]);
+        expect(problems).to.have.deep.nested
           .property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.property("[0].value").that.equals("1002");
+        expect(problems).to.have.deep.nested
+          .property("[0].value")
+          .that.equals("1002");
       });
 
       it("[not big]", () => {
         const problems = explainData(big_even, 1000);
         expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].via")
           .that.deep.equals(["big even", "[anonymous function]"]);
-        expect(problems).to.have.deep.property("[0].path").that.deep.equals([]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
+          .property("[0].path")
+          .that.deep.equals([]);
+        expect(problems).to.have.deep.nested
           .property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.property("[0].value").that.equals(1000);
+        expect(problems).to.have.deep.nested
+          .property("[0].value")
+          .that.equals(1000);
       });
 
       it("[not even]", () => {
         const problems = explainData(big_even, 1001);
         expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
           .property("[0].via")
           .that.deep.equals(["big even", "even"]);
-        expect(problems).to.have.deep.property("[0].path").that.deep.equals([]);
-        expect(problems).to.have.deep
+        expect(problems).to.have.deep.nested
+          .property("[0].path")
+          .that.deep.equals([]);
+        expect(problems).to.have.deep.nested
           .property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.property("[0].value").that.equals(1001);
+        expect(problems).to.have.deep.nested
+          .property("[0].value")
+          .that.equals(1001);
       });
     });
   });
