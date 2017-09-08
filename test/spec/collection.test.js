@@ -24,38 +24,42 @@ describe("collection", () => {
 
       it("[not a collection]", () => {
         const problems = explainData(spec, "string");
-        expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep.nested
-          .property("[0].value")
+        expect(problems)
+          .to.be.an("array")
+          .and.have.length(1);
+        expect(problems)
+          .to.have.deep.nested.property("[0].value")
           .that.deep.equals("string");
-        expect(problems).to.have.deep.nested
-          .property("[0].predicate")
+        expect(problems)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.nested
-          .property("[0].via")
+        expect(problems)
+          .to.have.deep.nested.property("[0].via")
           .that.is.an("array")
           .and.deep.equals(["1-3 friends"]);
-        expect(problems).to.have.deep.nested
-          .property("[0].path")
+        expect(problems)
+          .to.have.deep.nested.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([]);
       });
 
       it("[invalid item]", () => {
         const problems = explainData(spec, ["string"]);
-        expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep.nested
-          .property("[0].value")
+        expect(problems)
+          .to.be.an("array")
+          .and.have.length(1);
+        expect(problems)
+          .to.have.deep.nested.property("[0].value")
           .that.deep.equals("string");
-        expect(problems).to.have.deep.nested
-          .property("[0].predicate")
+        expect(problems)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.nested
-          .property("[0].via")
+        expect(problems)
+          .to.have.deep.nested.property("[0].via")
           .that.is.an("array")
           .and.deep.equals(["friend"]);
-        expect(problems).to.have.deep.nested
-          .property("[0].path")
+        expect(problems)
+          .to.have.deep.nested.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([0]);
       });
@@ -66,57 +70,63 @@ describe("collection", () => {
             name: 3000
           }
         ]);
-        expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep.nested
-          .property("[0].value")
+        expect(problems)
+          .to.be.an("array")
+          .and.have.length(1);
+        expect(problems)
+          .to.have.deep.nested.property("[0].value")
           .that.deep.equals(3000);
-        expect(problems).to.have.deep.nested
-          .property("[0].predicate")
+        expect(problems)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.nested
-          .property("[0].via")
+        expect(problems)
+          .to.have.deep.nested.property("[0].via")
           .that.is.an("array")
           .and.deep.equals(["friend", "isString"]);
-        expect(problems).to.have.deep.nested
-          .property("[0].path")
+        expect(problems)
+          .to.have.deep.nested.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([0, "name"]);
       });
 
       it("[too many items]", () => {
         const problems = explainData(spec, [1, 2, 3, 4]);
-        expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep.nested
-          .property("[0].value")
+        expect(problems)
+          .to.be.an("array")
+          .and.have.length(1);
+        expect(problems)
+          .to.have.deep.nested.property("[0].value")
           .that.deep.equals([1, 2, 3, 4]);
-        expect(problems).to.have.deep.nested
-          .property("[0].predicate")
+        expect(problems)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.nested
-          .property("[0].via")
+        expect(problems)
+          .to.have.deep.nested.property("[0].via")
           .that.is.an("array")
           .and.deep.equals(["1-3 friends"]);
-        expect(problems).to.have.deep.nested
-          .property("[0].path")
+        expect(problems)
+          .to.have.deep.nested.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([]);
       });
 
       it("[too few items]", () => {
         const problems = explainData(spec, []);
-        expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep.nested
-          .property("[0].value")
+        expect(problems)
+          .to.be.an("array")
+          .and.have.length(1);
+        expect(problems)
+          .to.have.deep.nested.property("[0].value")
           .that.deep.equals([]);
-        expect(problems).to.have.deep.nested
-          .property("[0].predicate")
+        expect(problems)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.nested
-          .property("[0].via")
+        expect(problems)
+          .to.have.deep.nested.property("[0].via")
           .that.is.an("array")
           .and.deep.equals(["1-3 friends"]);
-        expect(problems).to.have.deep.nested
-          .property("[0].path")
+        expect(problems)
+          .to.have.deep.nested.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([]);
       });
@@ -130,76 +140,84 @@ describe("collection", () => {
 
       it("[not a collection]", () => {
         const problems = explainData(spec, "string");
-        expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep.nested
-          .property("[0].value")
+        expect(problems)
+          .to.be.an("array")
+          .and.have.length(1);
+        expect(problems)
+          .to.have.deep.nested.property("[0].value")
           .that.deep.equals("string");
-        expect(problems).to.have.deep.nested
-          .property("[0].predicate")
+        expect(problems)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.nested
-          .property("[0].via")
+        expect(problems)
+          .to.have.deep.nested.property("[0].via")
           .that.is.an("array")
           .and.deep.equals(["some ints"]);
-        expect(problems).to.have.deep.nested
-          .property("[0].path")
+        expect(problems)
+          .to.have.deep.nested.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([]);
       });
 
       it("[invalid item]", () => {
         const problems = explainData(spec, ["string"]);
-        expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep.nested
-          .property("[0].value")
+        expect(problems)
+          .to.be.an("array")
+          .and.have.length(1);
+        expect(problems)
+          .to.have.deep.nested.property("[0].value")
           .that.deep.equals("string");
-        expect(problems).to.have.deep.nested
-          .property("[0].predicate")
+        expect(problems)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.nested
-          .property("[0].via")
+        expect(problems)
+          .to.have.deep.nested.property("[0].via")
           .that.is.an("array")
           .and.deep.equals(["isInteger"]);
-        expect(problems).to.have.deep.nested
-          .property("[0].path")
+        expect(problems)
+          .to.have.deep.nested.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([0]);
       });
 
       it("[too many items]", () => {
         const problems = explainData(spec, [1, 2, 3, 4]);
-        expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep.nested
-          .property("[0].value")
+        expect(problems)
+          .to.be.an("array")
+          .and.have.length(1);
+        expect(problems)
+          .to.have.deep.nested.property("[0].value")
           .that.deep.equals([1, 2, 3, 4]);
-        expect(problems).to.have.deep.nested
-          .property("[0].predicate")
+        expect(problems)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.nested
-          .property("[0].via")
+        expect(problems)
+          .to.have.deep.nested.property("[0].via")
           .that.is.an("array")
           .and.deep.equals(["some ints"]);
-        expect(problems).to.have.deep.nested
-          .property("[0].path")
+        expect(problems)
+          .to.have.deep.nested.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([]);
       });
 
       it("[too few items]", () => {
         const problems = explainData(spec, []);
-        expect(problems).to.be.an("array").and.have.length(1);
-        expect(problems).to.have.deep.nested
-          .property("[0].value")
+        expect(problems)
+          .to.be.an("array")
+          .and.have.length(1);
+        expect(problems)
+          .to.have.deep.nested.property("[0].value")
           .that.deep.equals([]);
-        expect(problems).to.have.deep.nested
-          .property("[0].predicate")
+        expect(problems)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.nested
-          .property("[0].via")
+        expect(problems)
+          .to.have.deep.nested.property("[0].via")
           .that.is.an("array")
           .and.deep.equals(["some ints"]);
-        expect(problems).to.have.deep.nested
-          .property("[0].path")
+        expect(problems)
+          .to.have.deep.nested.property("[0].path")
           .that.is.an("array")
           .and.deep.equals([]);
       });
@@ -217,8 +235,8 @@ describe("collection", () => {
         "array - count, happy"
       ).to.contain.ordered.members([1, 2]);
 
-      expect(spec.conform(new Set([1, 2])), "set - count, happy").to.be
-        .a("Set")
+      expect(spec.conform(new Set([1, 2])), "set - count, happy")
+        .to.be.a("Set")
         .that.contains(1, 2)
         .and.to.have.property("size", 2);
 
@@ -245,8 +263,8 @@ describe("collection", () => {
         1,
         2
       ]);
-      expect(spec.conform(new Set([1, 2])), "set - equal").to.be
-        .a("Set")
+      expect(spec.conform(new Set([1, 2])), "set - equal")
+        .to.be.a("Set")
         .that.contains(1, 2)
         .and.to.have.property("size", 2);
 
@@ -254,8 +272,8 @@ describe("collection", () => {
         spec.conform([1, 1, 1]),
         "array - more"
       ).to.contain.ordered.members([1, 1, 1]);
-      expect(spec.conform(new Set([1, 2, 3])), "set - more").to.be
-        .a("Set")
+      expect(spec.conform(new Set([1, 2, 3])), "set - more")
+        .to.be.a("Set")
         .that.contains(1, 2, 3)
         .and.to.have.property("size", 3);
 
@@ -272,14 +290,14 @@ describe("collection", () => {
         1,
         2
       ]);
-      expect(spec.conform(new Set([1, 2])), "set - equal").to.be
-        .a("Set")
+      expect(spec.conform(new Set([1, 2])), "set - equal")
+        .to.be.a("Set")
         .that.contains(1, 2)
         .and.to.have.property("size", 2);
 
       expect(spec.conform([1]), "array - less").to.contain.ordered.members([1]);
-      expect(spec.conform(new Set([1])), "set - less").to.be
-        .a("Set")
+      expect(spec.conform(new Set([1])), "set - less")
+        .to.be.a("Set")
         .that.contains(1)
         .and.to.have.property("size", 1);
 
@@ -294,8 +312,8 @@ describe("collection", () => {
       const value = [1, 2];
       expect(spec.conform(value), "array").to.contain.ordered.members(value);
       const s = new Set(value);
-      expect(spec.conform(s), "set").to.be
-        .a("Set")
+      expect(spec.conform(s), "set")
+        .to.be.a("Set")
         .that.contains(1, 2)
         .and.to.have.property("size", 2);
 
@@ -318,8 +336,8 @@ describe("collection", () => {
       ];
       expect(spec.conform(value), "array").to.deep.equal(value);
       const s = new Set(value);
-      expect(spec.conform(s), "set").to.be
-        .a("Set")
+      expect(spec.conform(s), "set")
+        .to.be.a("Set")
         .that.deep.contains(value[0], value[1])
         .and.to.have.property("size", 2);
     });
@@ -339,8 +357,8 @@ describe("collection", () => {
       ];
       expect(spec.conform(value), "array").to.deep.equal(value);
       const s = new Set(value);
-      expect(spec.conform(s), "set").to.be
-        .a("Set")
+      expect(spec.conform(s), "set")
+        .to.be.a("Set")
         .that.deep.contains(value[0], value[1])
         .and.to.have.property("size", 2);
     });

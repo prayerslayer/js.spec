@@ -108,51 +108,59 @@ describe("cat", () => {
   describe("explain", () => {
     it("[happy case]", () => {
       const problems = explainData(weak_ingredient, ["spoons", 5]);
-      expect(problems).to.be.an("array").and.to.have.length(0);
+      expect(problems)
+        .to.be.an("array")
+        .and.to.have.length(0);
     });
 
     it("[too many values]", () => {
       const problems = explainData(weak_ingredient, ["spoons", 5, 5]);
-      expect(problems).to.be.an("array").and.to.have.length(0);
+      expect(problems)
+        .to.be.an("array")
+        .and.to.have.length(0);
     });
 
     it("[too few values]", () => {
       const problems = explainData(weak_ingredient, ["spoons"]);
 
-      expect(problems).to.be.an("array").and.to.have.length(1);
-      expect(problems).to.have.deep.nested
-        .property("[0].predicate")
+      expect(problems)
+        .to.be.an("array")
+        .and.to.have.length(1);
+      expect(problems)
+        .to.have.deep.nested.property("[0].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep.nested
-        .property("[0].path")
+      expect(problems)
+        .to.have.deep.nested.property("[0].path")
         .that.is.an("array")
         .and.deep.equals([]);
-      expect(problems).to.have.deep.nested
-        .property("[0].via")
+      expect(problems)
+        .to.have.deep.nested.property("[0].via")
         .that.is.an("array")
         .and.deep.equals(["cat ·"]);
-      expect(problems).to.have.deep.nested
-        .property("[0].value")
+      expect(problems)
+        .to.have.deep.nested.property("[0].value")
         .that.deep.equals(["spoons"]);
     });
 
     it("[wrong predicate]", () => {
       const problems = explainData(weak_ingredient, ["spoons", false]);
 
-      expect(problems).to.be.an("array").and.to.have.length(1);
-      expect(problems).to.have.deep.nested
-        .property("[0].predicate")
+      expect(problems)
+        .to.be.an("array")
+        .and.to.have.length(1);
+      expect(problems)
+        .to.have.deep.nested.property("[0].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep.nested
-        .property("[0].path")
+      expect(problems)
+        .to.have.deep.nested.property("[0].path")
         .that.is.an("array")
         .and.deep.equals([1]);
-      expect(problems).to.have.deep.nested
-        .property("[0].via")
+      expect(problems)
+        .to.have.deep.nested.property("[0].via")
         .that.is.an("array")
         .and.deep.equals(["cat ·", "unit"]);
-      expect(problems).to.have.deep.nested
-        .property("[0].value")
+      expect(problems)
+        .to.have.deep.nested.property("[0].value")
         .that.deep.equals(false);
     });
   });

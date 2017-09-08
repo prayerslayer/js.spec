@@ -35,20 +35,22 @@ describe("map", () => {
           school: {}
         };
         const missingKey = explainData(friend, value);
-        expect(missingKey).to.be.an("array").and.have.length(1);
-        expect(missingKey).to.have.deep.nested
-          .property("[0].predicate")
+        expect(missingKey)
+          .to.be.an("array")
+          .and.have.length(1);
+        expect(missingKey)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(missingKey).to.have.deep.nested
-          .property("[0].path")
+        expect(missingKey)
+          .to.have.deep.nested.property("[0].path")
           .that.is.an("array")
           .and.deep.equals(["school", "district"]);
-        expect(missingKey).to.have.deep.nested
-          .property("[0].via")
+        expect(missingKey)
+          .to.have.deep.nested.property("[0].via")
           .that.is.an("array")
           .and.deep.equals(["friend", "school", "Keys(school)"]);
-        expect(missingKey).to.have.deep.nested
-          .property("[0].value")
+        expect(missingKey)
+          .to.have.deep.nested.property("[0].value")
           .that.deep.equals(value.school);
       });
 
@@ -60,18 +62,20 @@ describe("map", () => {
           }
         };
         const invalidKey = explainData(friend, value);
-        expect(invalidKey).to.be.an("array").and.have.length(1);
-        expect(invalidKey).to.have.deep.nested
-          .property("[0].predicate")
+        expect(invalidKey)
+          .to.be.an("array")
+          .and.have.length(1);
+        expect(invalidKey)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(invalidKey).to.have.deep.nested
-          .property("[0].path")
+        expect(invalidKey)
+          .to.have.deep.nested.property("[0].path")
           .that.deep.equals(["school", "district"]);
-        expect(invalidKey).to.have.deep.nested
-          .property("[0].via")
+        expect(invalidKey)
+          .to.have.deep.nested.property("[0].via")
           .that.deep.equals(["friend", "school", "isString"]);
-        expect(invalidKey).to.have.deep.nested
-          .property("[0].value")
+        expect(invalidKey)
+          .to.have.deep.nested.property("[0].value")
           .that.deep.equals(9);
       });
     });
@@ -88,20 +92,22 @@ describe("map", () => {
         const missingKey = explainData(friend, {
           district: "xhain"
         });
-        expect(missingKey).to.be.an("array").and.have.length(1);
-        expect(missingKey).to.have.deep.nested
-          .property("[0].predicate")
+        expect(missingKey)
+          .to.be.an("array")
+          .and.have.length(1);
+        expect(missingKey)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(missingKey).to.have.deep.nested
-          .property("[0].path")
+        expect(missingKey)
+          .to.have.deep.nested.property("[0].path")
           .that.is.an("array")
           .and.deep.equals(["name"]);
-        expect(missingKey).to.have.deep.nested
-          .property("[0].via")
+        expect(missingKey)
+          .to.have.deep.nested.property("[0].via")
           .that.is.an("array")
           .and.deep.equals(["friend", "Keys(friend)"]);
-        expect(missingKey).to.have.deep.nested
-          .property("[0].value")
+        expect(missingKey)
+          .to.have.deep.nested.property("[0].value")
           .that.deep.equals({
             district: "xhain"
           });
@@ -111,18 +117,20 @@ describe("map", () => {
         const invalidKey = explainData(friend, {
           name: 3000
         });
-        expect(invalidKey).to.be.an("array").and.have.length(1);
-        expect(invalidKey).to.have.deep.nested
-          .property("[0].predicate")
+        expect(invalidKey)
+          .to.be.an("array")
+          .and.have.length(1);
+        expect(invalidKey)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(invalidKey).to.have.deep.nested
-          .property("[0].path")
+        expect(invalidKey)
+          .to.have.deep.nested.property("[0].path")
           .that.deep.equals(["name"]);
-        expect(invalidKey).to.have.deep.nested
-          .property("[0].via")
+        expect(invalidKey)
+          .to.have.deep.nested.property("[0].via")
           .that.deep.equals(["friend", "isString"]);
-        expect(invalidKey).to.have.deep.nested
-          .property("[0].value")
+        expect(invalidKey)
+          .to.have.deep.nested.property("[0].value")
           .that.deep.equals(3000);
       });
     });
@@ -138,20 +146,22 @@ describe("map", () => {
         const invalidKey = explainData(caller, {
           phone: "stone"
         });
-        expect(invalidKey).to.be.an("array").and.have.length(1);
-        expect(invalidKey).to.have.deep.nested
-          .property("[0].predicate")
+        expect(invalidKey)
+          .to.be.an("array")
+          .and.have.length(1);
+        expect(invalidKey)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(invalidKey).to.have.deep.nested
-          .property("[0].path")
+        expect(invalidKey)
+          .to.have.deep.nested.property("[0].path")
           .that.is.an("array")
           .and.deep.equals(["phone"]);
-        expect(invalidKey).to.have.deep.nested
-          .property("[0].via")
+        expect(invalidKey)
+          .to.have.deep.nested.property("[0].via")
           .that.is.an("array")
           .and.deep.equals(["caller", "isNumber"]);
-        expect(invalidKey).to.have.deep.nested
-          .property("[0].value")
+        expect(invalidKey)
+          .to.have.deep.nested.property("[0].value")
           .that.equals("stone");
       });
     });

@@ -116,12 +116,16 @@ describe("alt", () => {
     it("[happy case]", () => {
       const id = ingredient_variation;
       const problems = explainData(id, ["spoons", 5]);
-      expect(problems).to.be.an("array").and.to.have.length(0);
+      expect(problems)
+        .to.be.an("array")
+        .and.to.have.length(0);
     });
 
     it("[too many values]", () => {
       const problems = explainData(ingredient_variation, ["spoons", 5, 5]);
-      expect(problems).to.be.an("array").and.to.have.length(0);
+      expect(problems)
+        .to.be.an("array")
+        .and.to.have.length(0);
     });
 
     it("[too few values]", () => {
@@ -129,36 +133,38 @@ describe("alt", () => {
       // neither alternative matches because of too few values
       // ==> 2 problems
       //
-      expect(problems).to.be.an("array").and.to.have.length(2);
+      expect(problems)
+        .to.be.an("array")
+        .and.to.have.length(2);
 
-      expect(problems).to.have.deep.nested
-        .property("[0].predicate")
+      expect(problems)
+        .to.have.deep.nested.property("[0].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep.nested
-        .property("[0].path")
+      expect(problems)
+        .to.have.deep.nested.property("[0].path")
         .that.is.an("array")
         .and.deep.equals([0]);
-      expect(problems).to.have.deep.nested
-        .property("[0].via")
+      expect(problems)
+        .to.have.deep.nested.property("[0].via")
         .that.is.an("array")
         .and.deep.equals(["alt |", "regular", "cat ·"]);
-      expect(problems).to.have.deep.nested
-        .property("[0].value")
+      expect(problems)
+        .to.have.deep.nested.property("[0].value")
         .that.deep.equals(["spoons"]);
 
-      expect(problems).to.have.deep.nested
-        .property("[1].predicate")
+      expect(problems)
+        .to.have.deep.nested.property("[1].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep.nested
-        .property("[1].path")
+      expect(problems)
+        .to.have.deep.nested.property("[1].path")
         .that.is.an("array")
         .and.deep.equals([1]);
-      expect(problems).to.have.deep.nested
-        .property("[1].via")
+      expect(problems)
+        .to.have.deep.nested.property("[1].via")
         .that.is.an("array")
         .and.deep.equals(["alt |", "reversed", "cat ·"]);
-      expect(problems).to.have.deep.nested
-        .property("[1].value")
+      expect(problems)
+        .to.have.deep.nested.property("[1].value")
         .that.deep.equals(["spoons"]);
     });
 
@@ -168,47 +174,49 @@ describe("alt", () => {
       // number, string doesn't match because spoons is not a number and false not a string
       // ==> 3 problems
 
-      expect(problems).to.be.an("array").and.to.have.length(3);
+      expect(problems)
+        .to.be.an("array")
+        .and.to.have.length(3);
 
-      expect(problems).to.have.deep.nested
-        .property("[0].predicate")
+      expect(problems)
+        .to.have.deep.nested.property("[0].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep.nested
-        .property("[0].path")
+      expect(problems)
+        .to.have.deep.nested.property("[0].path")
         .that.is.an("array")
         .and.deep.equals([0, 0]);
-      expect(problems).to.have.deep.nested
-        .property("[0].via")
+      expect(problems)
+        .to.have.deep.nested.property("[0].via")
         .that.is.an("array")
         .and.deep.equals(["alt |", "regular", "cat ·", "quantity", "isNumber"]);
-      expect(problems).to.have.deep.nested
-        .property("[0].value")
+      expect(problems)
+        .to.have.deep.nested.property("[0].value")
         .that.deep.equals("spoons");
 
-      expect(problems).to.have.deep.nested
-        .property("[1].predicate")
+      expect(problems)
+        .to.have.deep.nested.property("[1].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep.nested
-        .property("[1].path")
+      expect(problems)
+        .to.have.deep.nested.property("[1].path")
         .that.is.an("array")
         .and.deep.equals([0, 1]);
-      expect(problems).to.have.deep.nested
-        .property("[1].via")
+      expect(problems)
+        .to.have.deep.nested.property("[1].via")
         .that.is.an("array")
         .and.deep.equals(["alt |", "regular", "cat ·", "unit", "isString"]);
-      expect(problems).to.have.deep.nested
-        .property("[1].value")
+      expect(problems)
+        .to.have.deep.nested.property("[1].value")
         .that.deep.equals(false);
 
-      expect(problems).to.have.deep.nested
-        .property("[2].predicate")
+      expect(problems)
+        .to.have.deep.nested.property("[2].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep.nested
-        .property("[2].path")
+      expect(problems)
+        .to.have.deep.nested.property("[2].path")
         .that.is.an("array")
         .and.deep.equals([1, 1]);
-      expect(problems).to.have.deep.nested
-        .property("[2].via")
+      expect(problems)
+        .to.have.deep.nested.property("[2].via")
         .that.is.an("array")
         .and.deep.equals([
           "alt |",
@@ -217,8 +225,8 @@ describe("alt", () => {
           "quantity",
           "isNumber"
         ]);
-      expect(problems).to.have.deep.nested
-        .property("[2].value")
+      expect(problems)
+        .to.have.deep.nested.property("[2].value")
         .that.deep.equals(false);
     });
   });
