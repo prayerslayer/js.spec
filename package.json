@@ -5,15 +5,15 @@
   "main": "dist/js.spec.js",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-    "lint": "npm run lint-src && npm run lint-test",
+    "lint": "yarn run lint-src && yarn run lint-test",
     "lint-src": "eslint 'index.js' 'lib/**/*.js'",
     "lint-test": "eslint --config .eslintrc.test.json 'test/**/*.js'",
-    "prepare": "npm run build",
+    "prepare": "yarn run lint && yarn run build",
     "test": "mocha --recursive --compilers js:babel-register test",
     "test:watch": "mocha --recursive --reporter=min --watch --compilers js:babel-register test",
     "coverage": "babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha -- test --recursive",
-    "coveralls": "npm run coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
-    "autobuild": "./node_modules/.bin/nodemon -i 'dist/' -e 'js' -x 'npm run build'"
+    "coveralls": "yarn run coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "autobuild": "./node_modules/.bin/nodemon -i 'dist/' -e 'js' -x 'yarn run build'"
   },
   "repository": {
     "type": "git",
