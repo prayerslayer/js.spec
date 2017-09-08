@@ -49,7 +49,9 @@ describe("tuple", () => {
       expect(explainData(t, [0, 0]), "happy case").to.deep.equal([]);
 
       const notAnArray = explainData(t, "string");
-      expect(notAnArray).to.be.an("array").and.to.have.length(1);
+      expect(notAnArray)
+        .to.be.an("array")
+        .and.to.have.length(1);
       expect(notAnArray[0], "notAnArray").to.have.keys(
         "path",
         "via",
@@ -63,7 +65,9 @@ describe("tuple", () => {
       expect(notAnArray[0].predicate, "notAnArray").to.be.a("function");
 
       const missingValue = explainData(t, [0]);
-      expect(missingValue).to.be.an("array").and.to.have.length(1);
+      expect(missingValue)
+        .to.be.an("array")
+        .and.to.have.length(1);
       expect(missingValue[0], "missingValue").to.have.keys(
         "path",
         "via",
@@ -77,7 +81,9 @@ describe("tuple", () => {
       expect(missingValue[0].predicate, "missingValue").to.be.a("function");
 
       const extraValue = explainData(t, [0, 0, 0]);
-      expect(extraValue, "extraValue").to.be.an("array").and.to.have.length(1);
+      expect(extraValue, "extraValue")
+        .to.be.an("array")
+        .and.to.have.length(1);
       expect(extraValue[0], "extraValue").to.have.keys(
         "path",
         "via",
@@ -91,7 +97,9 @@ describe("tuple", () => {
       expect(extraValue[0].predicate, "extraValue").to.be.a("function");
 
       const wrongValue = explainData(t, ["0", 0]);
-      expect(wrongValue, "wrongValue").to.be.an("array").and.to.have.length(1);
+      expect(wrongValue, "wrongValue")
+        .to.be.an("array")
+        .and.to.have.length(1);
       expect(wrongValue[0], "wrongValue").to.have.keys(
         "path",
         "via",
@@ -115,8 +123,8 @@ describe("tuple", () => {
 
       const missingValue = explainData(line, [[0, 0]]);
 
-      expect(missingValue, "missingValue").to.be
-        .an("array")
+      expect(missingValue, "missingValue")
+        .to.be.an("array")
         .and.to.have.length(1);
       expect(missingValue[0], "missingValue").to.have.keys(
         "path",
@@ -131,7 +139,9 @@ describe("tuple", () => {
       expect(missingValue[0].predicate, "missingValue").to.be.a("function");
 
       const wrongValue = explainData(line, [[0, 0], ["0", 0]]);
-      expect(wrongValue, "wrongValue").to.be.an("array").and.to.have.length(1);
+      expect(wrongValue, "wrongValue")
+        .to.be.an("array")
+        .and.to.have.length(1);
       expect(wrongValue[0], "wrongValue").to.have.keys(
         "path",
         "via",

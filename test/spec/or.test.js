@@ -31,44 +31,46 @@ describe("or", () => {
         };
         const problems = explainData(positioned_friend, err);
 
-        expect(problems).to.be.an("array").and.have.length(2);
+        expect(problems)
+          .to.be.an("array")
+          .and.have.length(2);
 
         // problem with position spec
-        expect(problems).to.have.deep.nested
-          .property("[0].via")
+        expect(problems)
+          .to.have.deep.nested.property("[0].via")
           .that.deep.equals([
             "positioned or friend",
             "positioned",
             "positioned",
             "Keys(positioned)"
           ]);
-        expect(problems).to.have.deep.nested
-          .property("[0].path")
+        expect(problems)
+          .to.have.deep.nested.property("[0].path")
           .that.deep.equals(["lon"]);
-        expect(problems).to.have.deep.nested
-          .property("[0].predicate")
+        expect(problems)
+          .to.have.deep.nested.property("[0].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.nested
-          .property("[0].value")
+        expect(problems)
+          .to.have.deep.nested.property("[0].value")
           .that.equals(err);
 
         // problem with friend spec
-        expect(problems).to.have.deep.nested
-          .property("[1].via")
+        expect(problems)
+          .to.have.deep.nested.property("[1].via")
           .that.deep.equals([
             "positioned or friend",
             "friend",
             "named",
             "isString"
           ]);
-        expect(problems).to.have.deep.nested
-          .property("[1].path")
+        expect(problems)
+          .to.have.deep.nested.property("[1].path")
           .that.deep.equals(["name"]);
-        expect(problems).to.have.deep.nested
-          .property("[1].predicate")
+        expect(problems)
+          .to.have.deep.nested.property("[1].predicate")
           .that.is.a("function");
-        expect(problems).to.have.deep.nested
-          .property("[1].value")
+        expect(problems)
+          .to.have.deep.nested.property("[1].value")
           .that.equals(err.name);
       });
     });

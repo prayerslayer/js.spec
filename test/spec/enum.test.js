@@ -30,18 +30,20 @@ describe("enum", () => {
       const e = oneOf("one", 1, 2, 3);
       const problems = explainData(e, 4);
 
-      expect(problems).to.be.an("array").and.have.length(1);
-      expect(problems).to.have.deep.nested
-        .property("[0].via")
+      expect(problems)
+        .to.be.an("array")
+        .and.have.length(1);
+      expect(problems)
+        .to.have.deep.nested.property("[0].via")
         .that.deep.equals(["one"]);
-      expect(problems).to.have.deep.nested
-        .property("[0].path")
+      expect(problems)
+        .to.have.deep.nested.property("[0].path")
         .that.deep.equals([]);
-      expect(problems).to.have.deep.nested
-        .property("[0].predicate")
+      expect(problems)
+        .to.have.deep.nested.property("[0].predicate")
         .that.is.a("function");
-      expect(problems).to.have.deep.nested
-        .property("[0].value")
+      expect(problems)
+        .to.have.deep.nested.property("[0].value")
         .that.deep.equals(4);
     });
   });
