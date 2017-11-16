@@ -20,15 +20,7 @@ describe("predicate", () => {
         expect(p.number(nr)).to.be.true;
       })
     );
-    [
-      true,
-      false,
-      "string",
-      {},
-      [],
-      null,
-      undefined
-    ].forEach(nr =>
+    [true, false, "string", {}, [], null, undefined].forEach(nr =>
       it(`returns false for ${nr}`, () => {
         expect(p.number(nr)).to.be.false;
       })
@@ -67,13 +59,7 @@ describe("predicate", () => {
     );
   });
   describe("integer", () => {
-    [
-      -10,
-      0,
-      10,
-      20000,
-      Number.MAX_VALUE
-    ].forEach(nr =>
+    [-10, 0, 10, 20000, Number.MAX_VALUE].forEach(nr =>
       it(`returns true for ${nr}`, () => {
         expect(p.int(nr)).to.be.true;
       })
