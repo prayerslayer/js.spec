@@ -10,6 +10,9 @@ describe("predicate", () => {
       20000,
       3.14,
       1 / 2,
+      -Infinity,
+      Infinity,
+      NaN,
       Number.MAX_VALUE,
       Number.MIN_VALUE
     ].forEach(nr =>
@@ -17,9 +20,31 @@ describe("predicate", () => {
         expect(p.number(nr)).to.be.true;
       })
     );
+    [true, false, "string", {}, [], null, undefined].forEach(nr =>
+      it(`returns false for ${nr}`, () => {
+        expect(p.number(nr)).to.be.false;
+      })
+    );
+  });
+  describe("finite", () => {
+    [
+      -10,
+      0,
+      10,
+      20000,
+      3.14,
+      1 / 2,
+      Number.MAX_VALUE,
+      Number.MIN_VALUE
+    ].forEach(nr =>
+      it(`returns true for ${nr}`, () => {
+        expect(p.finite(nr)).to.be.true;
+      })
+    );
     [
       -Infinity,
       Infinity,
+      NaN,
       true,
       false,
       "string",
@@ -29,7 +54,33 @@ describe("predicate", () => {
       undefined
     ].forEach(nr =>
       it(`returns false for ${nr}`, () => {
-        expect(p.number(nr)).to.be.false;
+        expect(p.finite(nr)).to.be.false;
+      })
+    );
+  });
+  describe("integer", () => {
+    [-10, 0, 10, 20000, Number.MAX_VALUE].forEach(nr =>
+      it(`returns true for ${nr}`, () => {
+        expect(p.int(nr)).to.be.true;
+      })
+    );
+    [
+      -Infinity,
+      Infinity,
+      Number.MIN_VALUE,
+      NaN,
+      3.14,
+      1 / 2,
+      true,
+      false,
+      "string",
+      {},
+      [],
+      null,
+      undefined
+    ].forEach(nr =>
+      it(`returns false for ${nr}`, () => {
+        expect(p.int(nr)).to.be.false;
       })
     );
   });
