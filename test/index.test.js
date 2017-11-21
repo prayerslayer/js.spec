@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { assert } from "../index";
-import { number } from "../lib/predicates";
+import { assert, explainStr, spec } from "../index";
+import { number, string } from "../lib/predicates";
 
 describe("index", () => {
   describe("assert", () => {
@@ -9,7 +9,36 @@ describe("index", () => {
     });
 
     it("throws an Error when invalid", () => {
-      expect(() => assert(number, "string")).to.throw(Error, "isNumber");
+      expect(() => assert(number, "not a number")).to.throw(Error, "isNumber");
+    });
+  });
+
+  describe("explainStr", () => {
+    function noSpacesSpec(value) {
+      return /\.s+/.test(value);
+    }
+
+    it("explains an error with no path", () => {
+      const noSpaces = spec.and("check spaces", string, noSpacesSpec);
+      const actual = explainStr(noSpaces, "Hi there");
+      expect(actual).to.include("noSpacesSpec");
+    });
+
+    const school = spec.map("school", {
+      district: spec.string
+    });
+    const friend = spec.map("friend", {
+      name: spec.string,
+      school
+    });
+
+    it("explains an error when there is a path to the error", () => {
+      const value = {
+        name: "holger",
+        school: {}
+      };
+      const actual = explainStr(friend, value);
+      expect(actual).to.include(" at ");
     });
   });
 });
