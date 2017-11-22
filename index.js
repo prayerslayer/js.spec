@@ -3,7 +3,7 @@ import * as specs from "./lib/spec";
 import { catImpl as cat, altImpl as alt } from "./lib/regex";
 import * as predicates from "./lib/predicates";
 import * as symbols from "./lib/symbols";
-import getIn from "lodash.get";
+import get from "lodash.get";
 import flatten from "lodash.flattendeep";
 
 const specsAndPreds = Object.assign(
@@ -27,9 +27,13 @@ export function explainData(spec, value) {
 }
 
 function problemStr(problem, value) {
-  return `${problem.via.join(" → ")}: ${
+  let str = `${problem.via.join(" → ")}: ${
     problem.predicateName
-  } failed for ${getIn(value, problem.path)} at [${problem.path.join(", ")}].`;
+  } failed for ${get(value, problem.path, value)}`;
+  if (problem.path.length > 0) {
+    str += ` at [${problem.path.join(", ")}]`;
+  }
+  return str + ".";
 }
 
 export function explain(spec, value) {

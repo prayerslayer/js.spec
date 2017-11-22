@@ -19,7 +19,7 @@ function generateConformTests(testData, expectFn) {
 }
 
 describe("map", () => {
-  describe("explain", () => {
+  describe("explainData", () => {
     describe("works on nested maps", () => {
       const school = map("school", {
         district: p.string
