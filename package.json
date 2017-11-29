@@ -13,7 +13,8 @@
     "test:watch": "mocha --recursive --reporter=min --watch --compilers js:babel-register test",
     "coverage": "babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha -- test --recursive",
     "coveralls": "yarn run coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
-    "autobuild": "./node_modules/.bin/nodemon -i 'dist/' -e 'js' -x 'yarn run build'"
+    "autobuild": "./node_modules/.bin/nodemon -i 'dist/' -e 'js' -x 'yarn run build'",
+    "prettier": "./node_modules/.bin/prettier --print-width 80 --write index.js \"lib/**/*.js\""
   },
   "repository": {
     "type": "git",
