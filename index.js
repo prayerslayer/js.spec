@@ -27,9 +27,9 @@ export function explainData(spec, value) {
 }
 
 function problemStr(problem, value) {
-  let str = `${problem.via.join(
-    " → "
-  )}: ${problem.predicateName} failed for ${get(value, problem.path, value)}`;
+  let str = `${problem.via.join(" → ")}: ${
+    problem.predicateName
+  } failed for ${get(value, problem.path, value)}`;
   if (problem.path.length > 0) {
     str += ` at [${problem.path.join(", ")}]`;
   }
