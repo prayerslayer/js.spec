@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "lint": "yarn run lint-src && yarn run lint-test",
-    "lint-src": "eslint 'index.js' 'lib/**/*.js'",
+    "lint-src": "eslint --config .eslintrc.json 'index.js' 'lib/**/*.js'",
     "lint-test": "eslint --config .eslintrc.test.json 'test/**/*.js'",
     "prepare": "yarn run lint && yarn run build",
     "test": "mocha --recursive --compilers js:babel-register test",
