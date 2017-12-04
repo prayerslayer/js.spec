@@ -2,6 +2,17 @@ import { expect } from "chai";
 import * as p from "../lib/predicates";
 
 describe("predicate", () => {
+  describe("object", () => {
+    it("accepts plain objects", () => {
+      expect(p.obj({ x: 1 })).to.be.true;
+    });
+    it("accepts instances of constructed objects", () => {
+      expect(p.obj(new Date())).to.be.true;
+    });
+    it("rejects arrays", () => {
+      expect(p.obj([1, 2])).to.be.false;
+    });
+  });
   describe("number", () => {
     [
       -10,

@@ -60,7 +60,7 @@
     "lodash.isinteger": "^4.0.4",
     "lodash.isnil": "^4.0.0",
     "lodash.isnumber": "^3.0.3",
-    "lodash.isplainobject": "^4.0.6",
+    "lodash.isobjectlike": "^4.0.0",
     "lodash.isregexp": "^4.0.1",
     "lodash.isset": "^4.4.2",
     "lodash.isstring": "^4.0.1",
