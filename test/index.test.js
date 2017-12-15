@@ -13,6 +13,13 @@ describe("index", () => {
     });
   });
 
+  describe("predicate", () => {
+    it("creates a predicate spec from a function", () => {
+      const predSpec = spec.predicate("predicate test", value => value);
+      expect(predSpec.conform(true)).to.equal(true);
+    });
+  });
+
   describe("explainStr", () => {
     function noSpacesSpec(value) {
       return /\.s+/.test(value);
