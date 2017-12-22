@@ -29,7 +29,9 @@ export function explainData(spec, value) {
 export function problemStr(problem) {
   let str = `${problem.via.join(" → ")}: ${
     problem.predicateName
-  } failed for ${JSON.stringify(get(problem.value, problem.path, problem.value))}`;
+  } failed for ${JSON.stringify(
+    get(problem.value, problem.path, problem.value)
+  )}`;
   if (problem.path.length > 0) {
     str += ` at [${problem.path.join(", ")}]`;
   }
@@ -37,9 +39,7 @@ export function problemStr(problem) {
 }
 
 export function explain(spec, value) {
-  explainData(spec, value).forEach(
-    problem => console.log(problemStr(problem))
-  );
+  explainData(spec, value).forEach(problem => console.log(problemStr(problem))); // eslint-disable-line no-console
 }
 
 export function explainStr(spec, value) {
