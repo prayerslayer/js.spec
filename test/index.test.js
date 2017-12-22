@@ -47,5 +47,23 @@ describe("index", () => {
       const actual = explainStr(friend, value);
       expect(actual).to.include(" at ");
     });
+
+    it("doesn't contain undefined in the message string", () => {
+      const value = {
+        name: "holger",
+        school: {}
+      };
+      const actual = explainStr(friend, value);
+      expect(actual).not.to.include("undefined");
+    });
+
+    it("doesn't contain [object Object] in the message string", () => {
+      const value = {
+        name: "holger",
+        school: {}
+      };
+      const actual = explainStr(friend, value);
+      expect(actual).not.to.include("[object Object]");
+    });
   });
 });
