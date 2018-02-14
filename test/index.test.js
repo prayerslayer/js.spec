@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { assert, explainStr, spec } from "../index";
+import { AbstractSpec, assert, explainStr, spec } from "../index";
 import { number, string } from "../lib/predicates";
 
 describe("index", () => {
@@ -17,6 +17,14 @@ describe("index", () => {
     it("creates a predicate spec from a function", () => {
       const predSpec = spec.predicate("predicate test", value => value);
       expect(predSpec.conform(true)).to.equal(true);
+    });
+  });
+
+  describe("AbstractSpec", () => {
+    it("allows extension of AbstractSpec", () => {
+      class TestSpec extends AbstractSpec {}
+      const newTestSpec = new TestSpec("test", {});
+      expect(() => newTestSpec.conform("")).to.throw();
     });
   });
 
