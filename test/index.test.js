@@ -24,7 +24,10 @@ describe("index", () => {
     it("allows extension of AbstractSpec", () => {
       class TestSpec extends AbstractSpec {}
       const newTestSpec = new TestSpec("test", {});
-      expect(() => newTestSpec.conform("")).to.throw();
+      expect(() => newTestSpec.conform("")).to.throw(
+        Error,
+        "Implement in subclass: conform()"
+      );
     });
   });
 
