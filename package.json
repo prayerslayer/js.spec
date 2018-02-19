@@ -12,7 +12,7 @@
     "prepare": "yarn run build",
     "test": "yarn run lint && yarn run test-ts && mocha --recursive --compilers js:babel-register test",
     "test:watch": "mocha --recursive --reporter=min --watch --compilers js:babel-register test",
-    "test-ts": "./node_modules/.bin/tsc --noImplicitAny --noEmit types/types-test.ts",
+    "test-ts": "./node_modules/.bin/tsc --noImplicitAny --noEmit test/types/types-test.ts",
     "coverage": "babel-node ./node_modules/.bin/babel-istanbul cover ./node_modules/.bin/_mocha -- test --recursive",
     "coveralls": "yarn run coverage && cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "autobuild": "./node_modules/.bin/nodemon -i 'dist/' -e 'js' -x 'yarn run build'",
