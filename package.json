@@ -28,6 +28,12 @@
     "url": "https://github.com/prayerslayer/js.spec/issues"
   },
   "homepage": "https://github.com/prayerslayer/js.spec#readme",
+  "files": [
+    "index.js",
+    "lib/*",
+    "dist/*",
+    "types/*"
+  ],
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
