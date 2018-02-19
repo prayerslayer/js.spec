@@ -1,4 +1,4 @@
-import * as S from "./index";
+import * as S from "../../types/index";
 
 const spec: S.Spec = S.spec.predicate("test spec", S.spec.bool);
 const c: symbol = spec.conform("water");
