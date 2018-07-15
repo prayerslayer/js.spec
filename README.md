@@ -24,7 +24,7 @@ For a quick usage example see [example.js](example.js). Otherwise please refer t
 
 # Documentation
 
-[http://js-spec.online/](http://js-spec.online/)
+[https://prayerslayer.gitbooks.io/js-spec/content/](https://prayerslayer.gitbooks.io/js-spec/content/)
 
 # Installation
 
